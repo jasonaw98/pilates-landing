@@ -94,7 +94,7 @@ export default function OurFacilities() {
           })}
         </ul>
 
-        <div className="relative mx-auto mt-6 aspect-4/5 w-full max-w-xs shrink-0 overflow-hidden rounded-lg sm:max-w-sm">
+        <div className="relative mx-auto mt-6 h-[300px] w-full max-w-xs shrink-0 overflow-hidden rounded-lg sm:max-w-sm">
           {FACILITIES.map((facility, index) => (
             <Image
               key={facility.name}

@@ -61,7 +61,7 @@ export default function Navbar() {
         >
           <SheetHeader>
             <SheetTitle className="flex justify-between items-center">
-              <SheetClose>
+              <SheetClose className={cn("cursor-pointer")}>
                 <Link href="/">
                   <Image
                     src="/logo/brown_wordmark.svg"
@@ -72,7 +72,7 @@ export default function Navbar() {
                 </Link>
               </SheetClose>
               <div className="flex justify-between items-center gap-3">
-                <SheetClose>
+                <SheetClose className={cn("cursor-pointer")}>
                   <Link
                     href=""
                     className="border border-taupe-700 text-taupe-700 font-nord py-3 px-5 rounded-full text-xs"
@@ -80,7 +80,7 @@ export default function Navbar() {
                     BOOK NOW
                   </Link>
                 </SheetClose>
-                <SheetClose>
+                <SheetClose className={cn("cursor-pointer")}>
                   <Image
                     src="/icons/x_navbar.svg"
                     alt="logo"
