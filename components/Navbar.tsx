@@ -46,7 +46,7 @@ export default function Navbar() {
             >
               BOOK NOW
             </Link>
-            <SheetTrigger>
+            <SheetTrigger className="cursor-pointer">
               <div className="flex flex-col gap-2">
                 <p className="w-8 bg-neutral-50 h-0.5 rounded-full"></p>
                 <p className="w-8 bg-neutral-50 h-0.5 rounded-full"></p>
