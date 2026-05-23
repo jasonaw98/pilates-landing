@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const nord = localFont({
-  src: "../public/Fonts/Nord-Regular.otf",
+  src: "../public/fonts/Nord-Regular.otf",
   variable: "--font-nord",
   display: "swap",
 });
@@ -15,12 +15,12 @@ const nord = localFont({
 const ivyOraDisplay = localFont({
   src: [
     {
-      path: "../public/Fonts/IvyOraDisplay-Regular.ttf",
+      path: "../public/fonts/IvyOraDisplay-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/Fonts/IvyOraDisplay-RegularItalic.ttf",
+      path: "../public/fonts/IvyOraDisplay-RegularItalic.ttf",
       weight: "400",
       style: "italic",
     },
