@@ -77,7 +77,7 @@ function CommunityPhotoMosaic() {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-[min(8%,3rem)] flex justify-center px-4">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[min(8%,3rem)] flex justify-center px-4 max-w-xl mx-auto">
         <Link
           href={INSTAGRAM_URL}
           target="_blank"

@@ -7,10 +7,12 @@ export default function FormExperience() {
         <h1 className="font-nord text-taupe-700 text-lg uppercase">
           The Forme Experience
         </h1>
-        <p className="font-ivy-ora-display text-2xl px-1">
+        <p className="font-ivy-ora-display text-2xl px-1 md:max-w-3xl md:text-3xl tracking-wide">
           Forme is designed to help you move, rest and return. A considered
           space where different approaches to wellness combine to help you feel
-          at home in your body and mind.
+          at home in your
+          <span className="italic">&nbsp;body</span> and
+          <span className="italic">&nbsp;mind</span>.
         </p>
         <Image
           src="/logo/brown_logomark.svg"
@@ -33,13 +35,14 @@ export default function FormExperience() {
           </button>
         </div>
 
-        <div className="flex flex-col items-start w-full">
+        <div className="flex flex-col items-start w-full gap-2">
           <h1 className="font-ivy-ora-display text-left text-taupe-700 text-2xl ">
             Pilates Fundamentals
           </h1>
-          <p className="flex items-center gap-2 font-nord text-taupe-700">
-            50 MINS <span className="size-1 bg-taupe-700 rounded-full" /> BEGINNER{" "}
-            <span className="size-1 bg-taupe-700 rounded-full" /> MAX 6 PER GROUP
+          <p className="flex items-center gap-2 font-nord text-taupe-700 text-xs uppercase">
+            50 MINS <span className="size-1 bg-taupe-700 rounded-full" />{" "}
+            BEGINNER <span className="size-1 bg-taupe-700 rounded-full" /> MAX 6
+            PER GROUP
           </p>
         </div>
       </div>

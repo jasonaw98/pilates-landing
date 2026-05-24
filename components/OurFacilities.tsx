@@ -67,7 +67,7 @@ export default function OurFacilities() {
 
   return (
     <section className="relative bg-[#F7F2EA]">
-      <div className="sticky top-0 z-10 flex h-dvh min-h-140 flex-col px-6 pt-14 pb-8">
+      <div className="sticky top-0 z-10 flex h-[90dvh] min-h-140 flex-col px-6 pt-14 pb-8">
         <h2 className="font-nord text-taupe-700 text-center text-sm uppercase tracking-[0.2em]">
           Our Facilities
         </h2>

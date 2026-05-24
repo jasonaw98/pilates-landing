@@ -195,7 +195,7 @@ export default function Class() {
             <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
               {instructor.name}
             </h2>
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2 text-xs">
               <span className="font-nord text-taupe-700 uppercase">
                 50 MINS
               </span>
