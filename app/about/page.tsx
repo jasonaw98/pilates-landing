@@ -1,7 +1,8 @@
 "use client";
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const INSTRUCTORS = [
@@ -78,25 +79,48 @@ const gridVariants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
+function AboutHero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
+  const titleY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.4, 0]);
+
+  return (
+    <section
+      ref={heroRef}
+      className="relative h-[50vh] overflow-hidden"
+    >
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 top-[-15%] h-[130%] bg-position-[45%_90%] bg-size-[350%] md:bg-size-[200%] md:bg-position-[45%_80%] bg-no-repeat brightness-50 bg-[url('/assets/about.jpg')] grayscale-80 will-change-transform"
+        style={{ y: backgroundY }}
+      />
+      <motion.div
+        className="relative z-10 flex h-full items-center justify-center text-white"
+        style={{ y: titleY, opacity: titleOpacity }}
+      >
+        <h1 className="flex text-center font-ivy-ora-display text-4xl break-keep">
+          About
+        </h1>
+        <span className="font-ivy-ora-display text-4xl break-keep italic">
+          &nbsp;Us
+        </span>
+      </motion.div>
+    </section>
+  );
+}
+
 export default function About() {
   const isMobile = useIsMobile();
 
   return (
     <main>
-      <div className="relative h-[50vh]">
-        <div
-          className="absolute inset-0 bg-position-[45%_90%] bg-size-[350%] md:bg-size-[200%] md:bg-position-[45%_80%] bg-no-repeat brightness-50 bg-[url('/assets/about.jpg')] grayscale-80"
-          aria-hidden="true"
-        />
-        <div className="relative flex items-center justify-center text-white h-full z-10">
-          <h1 className="text-4xl font-ivy-ora-display break-keep text-center flex">
-            About
-          </h1>
-          <span className="text-4xl font-ivy-ora-display break-keep italic">
-            &nbsp;Us
-          </span>
-        </div>
-      </div>
+      <AboutHero />
 
       <section className="px-4 py-12 flex flex-col gap-12">
         <div className="flex flex-col items-center justify-center text-center gap-8 md:py-10">
