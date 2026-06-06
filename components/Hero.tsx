@@ -3,6 +3,16 @@
 import { Button } from "@base-ui/react";
 import { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { motion, Variants } from "motion/react";
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.9, ease: [0.52, 1, 0.36, 1] },
+  },
+};
 
 const DES_IMAGES = [
   {
@@ -55,25 +65,34 @@ export default function Hero() {
   }, []);
 
   return (
-    <main className="relative h-screen">
-      <div
-        className={`absolute inset-0 bg-no-repeat brightness-50 grayscale-25 transition-all duration-1000 ease-in-out`}
-        style={{
-          backgroundImage: `url(${DES_IMAGES[currentIndex].image})`,
-          backgroundPosition: isMobile
-            ? DES_IMAGES[currentIndex].mobile_position
-            : DES_IMAGES[currentIndex].position,
-          backgroundSize: isMobile
-            ? DES_IMAGES[currentIndex].mobile_size
-            : DES_IMAGES[currentIndex].size,
-          filter: isMobile
-            ? DES_IMAGES[currentIndex].mobile_filter
-            : DES_IMAGES[currentIndex].filter,
-        }}
-        aria-hidden="true"
-      />
-      
-      <div className="relative flex flex-col items-center justify-end md:items-start gap-4 text-white h-full pb-12 px-4 md:px-20 z-10">
+    <main className="relative h-screen overflow-hidden">
+      <div className="absolute inset-0" aria-hidden="true">
+        {DES_IMAGES.map((slide, index) => (
+          <motion.div
+            key={slide.image}
+            className="absolute inset-0 bg-no-repeat brightness-50 grayscale-25 will-change-[opacity]"
+            style={{
+              backgroundImage: `url(${slide.image})`,
+              backgroundPosition: isMobile
+                ? slide.mobile_position
+                : slide.position,
+              backgroundSize: isMobile ? slide.mobile_size : slide.size,
+              filter: isMobile ? slide.mobile_filter : slide.filter,
+              zIndex: index === currentIndex ? 1 : 0,
+            }}
+            animate={{ opacity: index === currentIndex ? 1 : 0 }}
+            transition={{ duration: 1.4, ease: "easeInOut" }}
+          />
+        ))}
+      </div>
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.9 }}
+        className="relative flex flex-col items-center justify-end md:items-start gap-4 text-white h-full pb-12 px-4 md:px-20 z-10"
+      >
         <h1 className="text-4xl font-ivy-ora-display break-keep text-center flex">
           A sanctuary for &nbsp;<p className="italic">stillness.</p>
         </h1>
@@ -89,7 +108,7 @@ export default function Hero() {
             BOOK NOW
           </span>
         </Button>
-      </div>
+      </motion.div>
     </main>
   );
 }

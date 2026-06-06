@@ -12,6 +12,16 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { motion, Variants } from "motion/react";
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 2.9, ease: [0.52, 1, 0.36, 1] },
+  },
+};
 
 const navigation = [
   {
@@ -141,7 +151,13 @@ export default function Navbar() {
           </SheetContent>
         </Sheet>
       ) : (
-        <nav className="hidden md:grid grid-cols-3 items-center p-10 text-white lg:px-20">
+        <motion.nav
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.9 }}
+          className="hidden md:grid grid-cols-3 items-center p-10 text-white lg:px-20"
+        >
           <div className="flex items-center gap-10">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href} className="font-nord">
@@ -172,7 +188,7 @@ export default function Navbar() {
               </span>
             </Link>
           </div>
-        </nav>
+        </motion.nav>
       )}
     </div>
   );
