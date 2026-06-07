@@ -1,6 +1,5 @@
 "use client";
-import { motion, useScroll, useTransform } from "motion/react";
-import { cn } from "@/lib/utils";
+import { motion, useScroll, useTransform, Variants } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -12,10 +11,8 @@ const INSTRUCTORS = [
     category: "Pilates",
     description:
       "Trained in New York and London, Maya teaches with a focus on control, precision, and pace. Her approach is slow, attentive, and deeply considered.",
-    bgPosition: "33% 10%",
-    bgSize: "210%",
-    desktopBgPosition: "20% 10%",
-    desktopBgSize: "130%",
+    mobile: { objectPosition: "33% 10%", imageScale: 2.1 },
+    desktop: { objectPosition: "20% 10%", imageScale: 1.3 },
   },
   {
     name: "Lior Adler",
@@ -23,10 +20,8 @@ const INSTRUCTORS = [
     category: "Yoga",
     description:
       "With over twenty years of practice, Lior’s classes feel less like instruction and more like permission. Rooted in Iyengar, yin, and somatic traditions.",
-    bgPosition: "70% 60%",
-    bgSize: "350%",
-    desktopBgPosition: "70% 50%",
-    desktopBgSize: "240%",
+    mobile: { objectPosition: "70% 60%", imageScale: 3.5 },
+    desktop: { objectPosition: "70% 50%", imageScale: 2.4 },
   },
   {
     name: "Lucia Romano",
@@ -34,10 +29,8 @@ const INSTRUCTORS = [
     category: "Meditation",
     description:
       "A former monastery practitioner, Lucia teaches meditation as a daily practice. Direct, grounded, and powerful.",
-    bgPosition: "50% 40%",
-    bgSize: "150%",
-    desktopBgPosition: "50% 40%",
-    desktopBgSize: "100%",
+    mobile: { objectPosition: "50% 40%", imageScale: 1.5 },
+    desktop: { objectPosition: "50% 40%", imageScale: 1 },
   },
   {
     name: "Wayan Sari",
@@ -45,10 +38,8 @@ const INSTRUCTORS = [
     category: "Pilates",
     description:
       "With a clinical pilates background, Wayan’s practice draws from rehabilitation and physiotherapy. Precise, supportive, and restorative.",
-    bgPosition: "50% 25%",
-    bgSize: "200%",
-    desktopBgPosition: "45% 20%",
-    desktopBgSize: "140%",
+    mobile: { objectPosition: "50% 25%", imageScale: 2 },
+    desktop: { objectPosition: "45% 20%", imageScale: 1.4 },
   },
   {
     name: "Nyoman Putri",
@@ -56,10 +47,8 @@ const INSTRUCTORS = [
     category: "Meditation",
     description:
       "Trained in Bali, Nyoman leads sound-based meditations using traditional instruments. A sensory, immersive approach to stillness.",
-    bgPosition: "70% 50%",
-    bgSize: "130%",
-    desktopBgPosition: "60% 40%",
-    desktopBgSize: "100%",
+    mobile: { objectPosition: "70% 50%", imageScale: 1.3 },
+    desktop: { objectPosition: "60% 40%", imageScale: 1 },
   },
   {
     name: "Isla Hart",
@@ -67,10 +56,8 @@ const INSTRUCTORS = [
     category: "Yoga",
     description:
       "Isla leads dynamic vinyasa flows grounded in structure and control. Accessible for beginners, with depth for experienced practitioners.",
-    bgPosition: "70% 45%",
-    bgSize: "170%",
-    desktopBgPosition: "55% 40%",
-    desktopBgSize: "100%",
+    mobile: { objectPosition: "70% 45%", imageScale: 1.7 },
+    desktop: { objectPosition: "55% 40%", imageScale: 1 },
   },
 ] as const;
 
@@ -91,15 +78,21 @@ function AboutHero() {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.4, 0]);
 
   return (
-    <section
-      ref={heroRef}
-      className="relative h-[50vh] overflow-hidden"
-    >
+    <section ref={heroRef} className="relative h-[50vh] overflow-hidden">
       <motion.div
         aria-hidden="true"
-        className="absolute inset-0 top-[-15%] h-[130%] bg-position-[45%_90%] bg-size-[350%] md:bg-size-[200%] md:bg-position-[45%_80%] bg-no-repeat brightness-50 bg-[url('/assets/about.jpg')] grayscale-80 will-change-transform"
+        className="absolute inset-0 top-[-15%] h-[130%] will-change-transform"
         style={{ y: backgroundY }}
-      />
+      >
+        <Image
+          src="/assets/about.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="origin-[45%_90%] object-cover object-[45%_90%] brightness-50 grayscale scale-[3.5] md:origin-[45%_80%] md:object-[45%_80%] md:scale-[2.5] lg:scale-[2]"
+        />
+      </motion.div>
       <motion.div
         className="relative z-10 flex h-full items-center justify-center text-white"
         style={{ y: titleY, opacity: titleOpacity }}
@@ -115,6 +108,15 @@ function AboutHero() {
   );
 }
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.9, ease: [0.52, 1, 0.36, 1] },
+  },
+};
+
 export default function About() {
   const isMobile = useIsMobile();
 
@@ -122,91 +124,111 @@ export default function About() {
     <main>
       <AboutHero />
 
-      <section className="px-4 py-12 flex flex-col gap-12">
-        <div className="flex flex-col items-center justify-center text-center gap-8 md:py-10">
+      <section className="flex flex-col gap-12 px-4 py-12">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.9 }}
+          className="flex flex-col items-center justify-center gap-8 text-center md:py-10"
+        >
           <h1 className="font-nord text-taupe-700 uppercase">Our Philosophy</h1>
-          <p className="font-ivy-ora-display text-2xl px-1 md:max-w-3xl md:text-3xl tracking-wide">
+          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-3xl">
             Wellness is not something to be achieved, but something to return
             to. At Forme, we see it as a quiet process of coming back to the
             body.
           </p>
-        </div>
+        </motion.div>
 
-        <span className="w-full h-px bg-neutral-300" />
+        <span className="h-px w-full bg-neutral-300" />
 
-        <div className="flex flex-col items-center justify-center text-center gap-8 md:py-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.9 }}
+          className="flex flex-col items-center justify-center gap-8 text-center md:py-10"
+        >
           <h1 className="font-nord text-taupe-700 uppercase">The Space</h1>
-          <p className="font-ivy-ora-display text-2xl px-1 md:max-w-3xl md:text-3xl tracking-wide">
+          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-3xl">
             Forme is set along the cliffs of Uluwatu, where land meets the sea.
             An intimate sanctuary, shaped by light and nature. A place to move,
             to rest, and to return.
           </p>
+        </motion.div>
+      </section>
+
+      <section className="flex flex-col gap-5 px-5 py-10 lg:px-20">
+        <h2 className="font-ivy-ora-display text-2xl text-taupe-700">
+          Recovery Lounge
+        </h2>
+        <div className="relative aspect-video w-full overflow-hidden brightness-70">
+          <Image
+            src="/assets/sitting.jpg"
+            alt="Recovery Lounge"
+            fill
+            sizes="(max-width: 1024px) 100vw, 80vw"
+            className="object-cover object-[50%_60%]"
+          />
         </div>
       </section>
 
-      <div className="flex flex-col px-5 py-10 gap-5 lg:px-20">
-        <h1 className="font-ivy-ora-display text-taupe-700 text-2xl">
-          Recovery Lounge
-        </h1>
-        <div>
-          <Image
-            src="/assets/sitting.jpg"
-            alt="About Space"
-            width={1000}
-            height={1000}
-            className="w-full h-full object-cover brightness-70"
-          />
-        </div>
-      </div>
-
-      <div className="flex flex-col px-5 py-10 gap-5 lg:px-20">
-        <h1 className="font-ivy-ora-display text-taupe-700 text-3xl">
+      <section className="flex flex-col gap-5 px-5 py-10 lg:px-20">
+        <h2 className="font-ivy-ora-display text-3xl text-taupe-700">
           Meet Your Instructors
-        </h1>
-        <span className="w-full h-px bg-neutral-300" />
+        </h2>
+        <span className="h-px w-full bg-neutral-300" />
         <motion.div
           variants={gridVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10"
+          className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8"
         >
-          {INSTRUCTORS.map((instructor, index) => (
-            <motion.div
-              key={instructor.name}
-              className="flex flex-col gap-2"
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 1, type: "spring" },
-                },
-              }}
-            >
-              <div
-                className={cn(
-                  "w-full bg-no-repeat brightness-90 h-[400px] xl:h-[500px] grayscale-25",
-                )}
-                style={
-                  {
-                    backgroundImage: `url(${instructor.image})`,
-                    backgroundPosition: isMobile ? instructor.bgPosition : instructor.desktopBgPosition,
-                    backgroundSize: isMobile ? instructor.bgSize : instructor.desktopBgSize,
-                  } as React.CSSProperties
-                }
-              />
-              <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
-                {instructor.name}
-              </h2>
-              <p className="font-nord text-taupe-700 text-sm">
-                {instructor.category}
-              </p>
-              <p className="text-taupe-700 text-sm">{instructor.description}</p>
-            </motion.div>
-          ))}
+          {INSTRUCTORS.map((instructor) => {
+            const crop = isMobile ? instructor.mobile : instructor.desktop;
+
+            return (
+              <motion.div
+                key={instructor.name}
+                className="flex flex-col gap-2"
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 1, type: "spring" },
+                  },
+                }}
+              >
+                <div className="relative aspect-4/3 w-full overflow-hidden brightness-90 grayscale-25">
+                  <Image
+                    src={instructor.image}
+                    alt={instructor.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
+                    style={{
+                      objectPosition: crop.objectPosition,
+                      transform: `scale(${crop.imageScale})`,
+                      transformOrigin: crop.objectPosition,
+                    }}
+                  />
+                </div>
+                <h3 className="font-ivy-ora-display text-2xl text-taupe-700">
+                  {instructor.name}
+                </h3>
+                <p className="font-nord text-sm text-taupe-700">
+                  {instructor.category}
+                </p>
+                <p className="text-sm text-taupe-700">
+                  {instructor.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </motion.div>
-      </div>
+      </section>
     </main>
   );
 }
