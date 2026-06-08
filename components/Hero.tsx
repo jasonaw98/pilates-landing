@@ -93,7 +93,7 @@ export default function Hero() {
         viewport={{ once: true, amount: 0.9 }}
         className="relative flex flex-col items-center justify-end md:items-start gap-4 text-white h-full pb-12 px-4 md:px-20 z-10"
       >
-        <h1 className="text-4xl font-ivy-ora-display break-keep text-center flex">
+        <h1 className="text-4xl font-ivy-ora-display break-keep text-left flex w-full">
           A sanctuary for &nbsp;<p className="italic">stillness.</p>
         </h1>
         <p className="text-sm">

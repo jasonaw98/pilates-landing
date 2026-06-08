@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import {
   Sheet,
   SheetClose,
@@ -38,15 +39,42 @@ const navigation = [
   },
 ];
 
+function MenuIcon({ open }: { open: boolean }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="relative flex h-[18px] w-8 items-center justify-center"
+    >
+      <motion.span
+        className="absolute block h-0.5 w-8 rounded-full bg-neutral-50"
+        animate={{
+          rotate: open ? 45 : 0,
+          y: open ? 0 : -5,
+        }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      />
+      <motion.span
+        className="absolute block h-0.5 w-8 rounded-full bg-neutral-50"
+        animate={{
+          rotate: open ? -45 : 0,
+          y: open ? 0 : 5,
+        }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      />
+    </div>
+  );
+}
+
 export default function Navbar() {
   const isMobile = useIsMobile();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-1">
       {isMobile ? (
-        <Sheet>
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           {/* Mobile */}
-          <nav className="flex justify-between items-center p-4 md:hidden">
+          <nav className="flex justify-between items-center px-4 py-7 md:hidden">
             <Link href="/">
               <Image
                 src="/logo/beige_wordmark.svg"
@@ -58,22 +86,22 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/"
-                className="border border-neutral-100 py-2 px-5 rounded-full font-nord text-xs text-white"
+                className="border border-neutral-100 py-3 px-5 rounded-full font-nord text-xs text-white"
               >
                 BOOK NOW
               </Link>
-              <SheetTrigger className="cursor-pointer">
-                <div className="flex flex-col gap-2">
-                  <p className="w-8 bg-neutral-50 h-0.5 rounded-full"></p>
-                  <p className="w-8 bg-neutral-50 h-0.5 rounded-full"></p>
-                </div>
+              <SheetTrigger
+                className="cursor-pointer"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+              >
+                <MenuIcon open={menuOpen} />
               </SheetTrigger>
             </div>
           </nav>
 
           <SheetContent
-            side="left"
-            className={cn("bg-neutral-50 w-full! font-nord")}
+            side="top"
+            className={cn("bg-neutral-50 w-full! font-nord h-full!")}
             showCloseButton={false}
           >
             <SheetHeader>
@@ -127,7 +155,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="flex justify-center items-center pt-24">
+            <div className="flex justify-center items-center pt-16 px-6">
               <Image
                 src="/assets/nav_sheet.jpg"
                 alt="logo"

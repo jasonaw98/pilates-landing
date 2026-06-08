@@ -130,7 +130,7 @@ function ClassHero() {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.4, 0]);
 
   return (
-    <section ref={heroRef} className="relative h-[50vh] overflow-hidden">
+    <section ref={heroRef} className="relative h-[65dvh] overflow-hidden">
       <motion.div
         aria-hidden="true"
         className="absolute inset-0 top-[-15%] h-[130%] will-change-transform"
@@ -199,12 +199,15 @@ export default function Class() {
                 {pkg.price}
                 <span className="text-taupe-700 text-xs">/ month</span>
               </p>
-              <button
-                type="button"
-                className="mt-auto w-full rounded-full border border-taupe-700 px-4 py-2 font-nord text-xs uppercase text-taupe-700"
-              >
-                BUY NOW
-              </button>
+
+              <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group relative overflow-hidden">
+                <span className="block h-full text-center transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                  BUY NOW
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                  BUY NOW
+                </span>
+              </div>
             </div>
           ))}
         </div>
@@ -269,12 +272,14 @@ export default function Class() {
                   MAX 6 PER GROUP
                 </span>
               </div>
-              <button
-                type="button"
-                className="mt-auto w-full rounded-full border border-taupe-700 px-4 py-2 font-nord text-xs uppercase text-taupe-700"
-              >
-                BOOK NOW
-              </button>
+              <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group relative overflow-hidden">
+                <span className="block h-full text-center transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                  BOOK NOW
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                  BOOK NOW
+                </span>
+              </div>
             </motion.div>
           ))}
         </div>

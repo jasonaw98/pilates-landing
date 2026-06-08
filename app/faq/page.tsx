@@ -73,9 +73,9 @@ const PRICING = [
 export default function FAQ() {
   return (
     <div>
-      <div className="relative h-[50vh] md:h-[60vh]">
+      <div className="relative h-[65dvh] md:h-[60vh]">
         <div
-          className="absolute inset-0 bg-position-[80%_1%] bg-size-[170%] md:bg-size-[100%] md:bg-position-[50%_40%] bg-no-repeat brightness-50 bg-[url('/assets/faq.jpg')] grayscale-100"
+          className="absolute inset-0 bg-position-[80%_1%] bg-size-[170%] md:bg-size-[130%] md:bg-position-[50%_40%] bg-no-repeat brightness-50 bg-[url('/assets/faq.jpg')] grayscale-100"
           aria-hidden="true"
         />
         <div className="relative flex flex-col md:flex-row items-center justify-center text-white h-full z-10">

@@ -78,7 +78,7 @@ function AboutHero() {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.4, 0]);
 
   return (
-    <section ref={heroRef} className="relative h-[50vh] overflow-hidden">
+    <section ref={heroRef} className="relative h-[65dvh] overflow-hidden">
       <motion.div
         aria-hidden="true"
         className="absolute inset-0 top-[-15%] h-[130%] will-change-transform"
@@ -90,7 +90,7 @@ function AboutHero() {
           fill
           priority
           sizes="100vw"
-          className="origin-[45%_90%] object-cover object-[45%_90%] brightness-50 grayscale scale-[3.5] md:origin-[45%_80%] md:object-[45%_80%] md:scale-[2.5] lg:scale-[2]"
+          className="origin-[45%_90%] object-cover object-[45%_90%] brightness-50 grayscale scale-[3.5] md:origin-[45%_80%] md:object-[45%_90%] md:scale-[2.5]"
         />
       </motion.div>
       <motion.div

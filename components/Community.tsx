@@ -93,8 +93,8 @@ function CommunityPhotoMosaic() {
 
 export default function Community() {
   return (
-    <div className="border-t border-neutral-300 mt-4">
-      <div className="flex flex-col px-4 py-12 items-center justify-center text-center gap-8">
+    <div className="">
+      <div className="flex flex-col px-4 py-12 items-center justify-center text-center gap-16 h-[80vh]">
         <h1 className="font-nord text-taupe-700 text-lg uppercase">
           From our community
         </h1>
