@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "motion/react";
 import {
   Accordion,
   AccordionContent,
@@ -6,7 +7,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
 
 const NEW = [
   {
@@ -88,7 +88,12 @@ export default function FAQ() {
         </div>
       </div>
 
-      <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="px-4 py-12 flex flex-col gap-12 lg:px-24">
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="px-4 py-12 flex flex-col gap-12 lg:px-24"
+      >
         <div className="flex flex-col gap-5">
           <h1 className="font-ivy-ora-display text-taupe-700 text-2xl">
             New to Forme

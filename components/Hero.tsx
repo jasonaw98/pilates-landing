@@ -1,9 +1,9 @@
 "use client";
 
 import { Button } from "@base-ui/react";
-import { useState, useEffect } from "react";
+import { motion, type Variants } from "motion/react";
+import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { motion, Variants } from "motion/react";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0, y: 40 },

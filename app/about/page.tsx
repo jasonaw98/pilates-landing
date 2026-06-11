@@ -1,5 +1,5 @@
 "use client";
-import { motion, useScroll, useTransform, Variants } from "motion/react";
+import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";

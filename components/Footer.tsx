@@ -1,8 +1,8 @@
 "use client";
-import Image from "next/image";
-import { useIsMobile } from "@/hooks/use-mobile";
-import Link from "next/link";
 import { motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Footer() {
   const isMobile = useIsMobile();

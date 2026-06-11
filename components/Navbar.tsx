@@ -1,6 +1,7 @@
 "use client";
-import Link from "next/link";
+import { motion, type Variants } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import {
   Sheet,
@@ -11,9 +12,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { motion, Variants } from "motion/react";
+import { cn } from "@/lib/utils";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0, y: 40 },

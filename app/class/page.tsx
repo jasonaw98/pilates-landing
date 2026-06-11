@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
+import Image from "next/image";
 import { useRef } from "react";
 
 const PACKAGES = [
@@ -177,19 +177,22 @@ export default function Class() {
         <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8">
           {PACKAGES.map((pkg) => (
             <div key={pkg.name} className="flex h-full flex-col gap-3">
-              <div className="relative aspect-video w-full overflow-hidden brightness-90 grayscale-25">
+              <div className="relative aspect-video w-full overflow-hidden brightness-90 grayscale-25 group cursor-pointer">
                 <Image
                   src={pkg.image}
                   alt={pkg.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   style={{
                     objectPosition: pkg.objectPosition,
                     transform: `scale(${pkg.imageScale})`,
                     transformOrigin: pkg.objectPosition,
                   }}
                 />
+                <div className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap">
+                  View Class
+                </div>
               </div>
               <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
                 {pkg.name}
@@ -239,7 +242,7 @@ export default function Class() {
                 },
               }}
             >
-              <div className="relative aspect-4/3 w-full overflow-hidden brightness-90 grayscale-25">
+              <div className="relative aspect-4/3 w-full overflow-hidden brightness-90 grayscale-25 cursor-pointer group">
                 <Image
                   src={classItem.image}
                   alt={classItem.name}
