@@ -1,7 +1,7 @@
 "use client";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 
 const PACKAGES = [
   {
@@ -36,6 +36,7 @@ const PACKAGES = [
 const CLASSES = [
   {
     name: "Pilates Fundamentals",
+    category: "Pilates",
     image: "/assets/pilates_fundamentals.jpg",
     level: "All Levels",
     objectPosition: "33% 80%",
@@ -43,6 +44,7 @@ const CLASSES = [
   },
   {
     name: "Reformer Pilates",
+    category: "Pilates",
     image: "/assets/bendyoga.jpg",
     level: "All Levels",
     objectPosition: "90% 100%",
@@ -50,6 +52,7 @@ const CLASSES = [
   },
   {
     name: "Slow Flow Yoga",
+    category: "Yoga",
     image: "/instructor/lior.jpg",
     level: "All Levels",
     objectPosition: "60% 80%",
@@ -57,6 +60,7 @@ const CLASSES = [
   },
   {
     name: "Yin Yoga",
+    category: "Yoga",
     image: "/assets/mindful.png",
     level: "Hard",
     objectPosition: "33% 80%",
@@ -64,6 +68,7 @@ const CLASSES = [
   },
   {
     name: "Guided Meditation",
+    category: "Meditation",
     image: "/assets/guided_meditation.jpg",
     level: "All Levels",
     objectPosition: "33% 100%",
@@ -71,6 +76,7 @@ const CLASSES = [
   },
   {
     name: "Soundbath Meditation",
+    category: "Meditation",
     image: "/assets/soundbath.jpg",
     level: "All Levels",
     objectPosition: "33% 60%",
@@ -161,6 +167,31 @@ function ClassHero() {
 }
 
 export default function Class() {
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const categories = ["All", "Pilates", "Yoga", "Meditation"] as const;
+
+  const categoryCounts = useMemo(
+    () => ({
+      All: CLASSES.length,
+      Pilates: CLASSES.filter((instructor) => instructor.category === "Pilates")
+        .length,
+      Yoga: CLASSES.filter((instructor) => instructor.category === "Yoga")
+        .length,
+      Meditation: CLASSES.filter(
+        (instructor) => instructor.category === "Meditation",
+      ).length,
+    }),
+    [],
+  );
+
+  const filteredCLASSES = useMemo(() => {
+    if (activeFilter === "All") return CLASSES;
+    return CLASSES.filter((instructor) => instructor.category === activeFilter);
+  }, [activeFilter]);
+
+  const hasResults = filteredCLASSES.length > 0;
+
   return (
     <main>
       <ClassHero />
@@ -228,64 +259,110 @@ export default function Class() {
         <h1 className="font-ivy-ora-display text-taupe-700 text-3xl will-change-transform">
           Available Classes
         </h1>
-        <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8">
-          {CLASSES.map((classItem) => (
-            <motion.div
-              key={classItem.name}
-              className="group flex h-full flex-col gap-3"
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 1, type: "spring" },
-                },
-              }}
-            >
-              <div className="relative aspect-4/3 w-full overflow-hidden brightness-90 grayscale-25 cursor-pointer group">
-                <Image
-                  src={classItem.image}
-                  alt={classItem.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  style={{
-                    objectPosition: classItem.objectPosition,
-                    transform: `scale(${classItem.imageScale})`,
-                    transformOrigin: classItem.objectPosition,
-                  }}
-                />
-                <div className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap">
-                  View Class
-                </div>
-              </div>
-              <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
-                {classItem.name}
-              </h2>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-                <span className="font-nord text-taupe-700 uppercase">
-                  50 MINS
+        <div className="flex flex-wrap items-center gap-8">
+          {categories.map((category) => {
+            const isActive = activeFilter === category;
+
+            return (
+              <motion.button
+                key={category}
+                type="button"
+                onClick={() => setActiveFilter(category)}
+                transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                className={`py-2 font-nord text-sm font-semibold uppercase tracking-[0.2em] transition cursor-pointer ${
+                  isActive ? "text-taupe-700" : "text-taupe-00 opacity-40"
+                }`}
+              >
+                <span>{category}</span>
+                <span className="ml-1 py-0.5 tracking-[0.1rem] opacity-80">
+                  ({categoryCounts[category]})
                 </span>
-                <span className="size-1 bg-taupe-700 rounded-full" />
-                <span className="font-nord text-taupe-700">
-                  {classItem.level}
-                </span>
-                <span className="size-1 bg-taupe-700 rounded-full" />
-                <span className="font-nord text-taupe-700 uppercase">
-                  MAX 6 PER GROUP
-                </span>
-              </div>
-              <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group relative overflow-hidden">
-                <span className="block h-full text-center transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
-                  BOOK NOW
-                </span>
-                <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
-                  BOOK NOW
-                </span>
-              </div>
-            </motion.div>
-          ))}
+              </motion.button>
+            );
+          })}
         </div>
+
+        {hasResults ? (
+          <motion.div
+            key={activeFilter}
+            variants={gridVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8"
+          >
+            {filteredCLASSES.map((classItem) => (
+              <motion.div
+                key={classItem.name}
+                className="group flex h-full flex-col gap-3"
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 1, type: "spring" },
+                  },
+                }}
+              >
+                <div className="relative aspect-4/3 w-full overflow-hidden brightness-90 grayscale-25 cursor-pointer group">
+                  <Image
+                    src={classItem.image}
+                    alt={classItem.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      objectPosition: classItem.objectPosition,
+                      transform: `scale(${classItem.imageScale})`,
+                      transformOrigin: classItem.objectPosition,
+                    }}
+                  />
+                  <div className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap">
+                    View Class
+                  </div>
+                </div>
+                <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
+                  {classItem.name}
+                </h2>
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+                  <span className="font-nord text-taupe-700 uppercase">
+                    50 MINS
+                  </span>
+                  <span className="size-1 bg-taupe-700 rounded-full" />
+                  <span className="font-nord text-taupe-700">
+                    {classItem.level}
+                  </span>
+                  <span className="size-1 bg-taupe-700 rounded-full" />
+                  <span className="font-nord text-taupe-700 uppercase">
+                    MAX 6 PER GROUP
+                  </span>
+                </div>
+                <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group relative overflow-hidden">
+                  <span className="block h-full text-center transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                    BOOK NOW
+                  </span>
+                  <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                    BOOK NOW
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-3xl border border-dashed border-neutral-300 bg-[#F7F2EA] px-6 py-10 text-center text-taupe-700"
+          >
+            <p className="font-ivy-ora-display text-xl">
+              No classes match this category yet.
+            </p>
+            <p className="mt-2 font-nord text-sm uppercase tracking-[0.2em]">
+              Try another filter.
+            </p>
+          </motion.div>
+        )}
       </motion.div>
 
       <motion.div

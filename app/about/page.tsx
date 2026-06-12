@@ -1,7 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const INSTRUCTORS = [
@@ -119,6 +119,33 @@ const containerVariants: Variants = {
 
 export default function About() {
   const isMobile = useIsMobile();
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const categories = ["All", "Pilates", "Yoga", "Meditation"] as const;
+
+  const categoryCounts = useMemo(
+    () => ({
+      All: INSTRUCTORS.length,
+      Pilates: INSTRUCTORS.filter(
+        (instructor) => instructor.category === "Pilates",
+      ).length,
+      Yoga: INSTRUCTORS.filter((instructor) => instructor.category === "Yoga")
+        .length,
+      Meditation: INSTRUCTORS.filter(
+        (instructor) => instructor.category === "Meditation",
+      ).length,
+    }),
+    [],
+  );
+
+  const filteredInstructors = useMemo(() => {
+    if (activeFilter === "All") return INSTRUCTORS;
+    return INSTRUCTORS.filter(
+      (instructor) => instructor.category === activeFilter,
+    );
+  }, [activeFilter]);
+
+  const hasResults = filteredInstructors.length > 0;
 
   return (
     <main>
@@ -177,57 +204,96 @@ export default function About() {
         <h2 className="font-ivy-ora-display text-3xl text-taupe-700">
           Meet Your Instructors
         </h2>
-        <span className="h-px w-full bg-neutral-300" />
-        <motion.div
-          variants={gridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8"
-        >
-          {INSTRUCTORS.map((instructor) => {
-            const crop = isMobile ? instructor.mobile : instructor.desktop;
+        <div className="flex flex-wrap items-center gap-8">
+          {categories.map((category) => {
+            const isActive = activeFilter === category;
 
             return (
-              <motion.div
-                key={instructor.name}
-                className="flex flex-col gap-2"
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 1, type: "spring" },
-                  },
-                }}
+              <motion.button
+                key={category}
+                type="button"
+                onClick={() => setActiveFilter(category)}
+                transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                className={`py-2 font-nord text-sm font-semibold uppercase tracking-[0.2em] transition cursor-pointer ${
+                  isActive ? "text-taupe-700" : "text-taupe-00 opacity-40"
+                }`}
               >
-                <div className="relative aspect-4/3 w-full overflow-hidden brightness-90 grayscale-25">
-                  <Image
-                    src={instructor.image}
-                    alt={instructor.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover"
-                    style={{
-                      objectPosition: crop.objectPosition,
-                      transform: `scale(${crop.imageScale})`,
-                      transformOrigin: crop.objectPosition,
-                    }}
-                  />
-                </div>
-                <h3 className="font-ivy-ora-display text-2xl text-taupe-700">
-                  {instructor.name}
-                </h3>
-                <p className="font-nord text-sm text-taupe-700">
-                  {instructor.category}
-                </p>
-                <p className="text-sm text-taupe-700">
-                  {instructor.description}
-                </p>
-              </motion.div>
+                <span>{category}</span>
+                <span className="ml-1 py-0.5 tracking-[0.1rem] opacity-80">
+                  ({categoryCounts[category]})
+                </span>
+              </motion.button>
             );
           })}
-        </motion.div>
+        </div>
+        <span className="h-px w-full bg-neutral-300" />
+        {hasResults ? (
+          <motion.div
+            key={activeFilter}
+            variants={gridVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8"
+          >
+            {filteredInstructors.map((instructor) => {
+              const crop = isMobile ? instructor.mobile : instructor.desktop;
+
+              return (
+                <motion.div
+                  key={instructor.name}
+                  className="flex flex-col gap-2"
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 1, type: "spring" },
+                    },
+                  }}
+                >
+                  <div className="relative aspect-4/3 w-full overflow-hidden brightness-90 grayscale-25">
+                    <Image
+                      src={instructor.image}
+                      alt={instructor.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover"
+                      style={{
+                        objectPosition: crop.objectPosition,
+                        transform: `scale(${crop.imageScale})`,
+                        transformOrigin: crop.objectPosition,
+                      }}
+                    />
+                  </div>
+                  <h3 className="font-ivy-ora-display text-2xl text-taupe-700">
+                    {instructor.name}
+                  </h3>
+                  <p className="font-nord text-sm text-taupe-700">
+                    {instructor.category}
+                  </p>
+                  <p className="text-sm text-taupe-700">
+                    {instructor.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        ) : (
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-3xl border border-dashed border-neutral-300 bg-[#F7F2EA] px-6 py-10 text-center text-taupe-700"
+          >
+            <p className="font-ivy-ora-display text-xl">
+              No instructors match this category yet.
+            </p>
+            <p className="mt-2 font-nord text-sm uppercase tracking-[0.2em]">
+              Try another filter.
+            </p>
+          </motion.div>
+        )}
       </section>
     </main>
   );

@@ -160,7 +160,7 @@ export default function ScrollZoomReveal({
             justify-center
           "
         >
-          <div className="max-w-5xl px-8 text-center text-white flex-col flex justify-between h-full py-20 pt-32">
+          <div className="max-w-5xl px-8 text-center text-white flex-col flex justify-between items-center h-full py-20 pt-32">
             <h1 className="text-4xl font-ivy-ora-display break-keep text-center flex flex-col gap-2 md:flex-row">
               <p>Begin your</p>
               <div className="flex">

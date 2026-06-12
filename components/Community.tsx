@@ -82,7 +82,7 @@ function CommunityPhotoMosaic() {
           href={INSTAGRAM_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="pointer-events-auto font-nord w-[70%] text-center text-taupe-700 bg-[#F7F2EA] rounded-full px-5 py-2.5 text-xs uppercase tracking-[0.12em] shadow-sm sm:px-7 sm:text-xs"
+          className="pointer-events-auto font-nord w-[70%] text-center text-taupe-700 bg-[#F7F2EA] rounded-full px-5 py-2.5 text-xs uppercase tracking-[0.12em] shadow-sm sm:px-7 sm:text-xs max-w-xs"
         >
           See more on Instagram
         </Link>
