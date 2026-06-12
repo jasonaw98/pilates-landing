@@ -3,13 +3,15 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/use-mobile";
+import ScrollZoomReveal from "./ScrollZoom";
 
 export default function Footer() {
   const isMobile = useIsMobile();
 
   return (
     <main>
-      <div className="h-[60vh] relative">
+      <ScrollZoomReveal image="/assets/nav_sheet.jpg" title="Explore Beyond" />
+      {/* <div className="h-[60vh] relative">
         <div
           className="h-full absolute inset-0 bg-position-[50%_80%] bg-size-[350%] md:bg-size-[200%] bg-no-repeat brightness-45 bg-[url('/assets/nav_sheet.jpg')] saturate-90 grayscale-20"
           aria-hidden="true"
@@ -31,7 +33,7 @@ export default function Footer() {
             </span>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {isMobile ? (
         <div className="bg-[#3A1A12] px-6 pt-12 flex flex-col gap-8 border border-[#3A1A12]">
