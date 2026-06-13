@@ -1,4 +1,5 @@
 "use client";
+import LoadingScreen from "@/components/LoadingScreen";
 import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
@@ -194,6 +195,19 @@ export default function Class() {
 
   return (
     <main>
+      <LoadingScreen
+        title={
+          <div className="relative z-10 flex h-full items-center justify-center text-white">
+            <h1 className="flex text-center font-ivy-ora-display text-4xl break-keep">
+              Discover your next
+            </h1>
+            <span className="font-ivy-ora-display text-4xl break-keep italic">
+              &nbsp;class.
+            </span>
+          </div>
+        }
+      />
+
       <ClassHero />
 
       <motion.div

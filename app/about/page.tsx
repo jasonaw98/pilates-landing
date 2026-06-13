@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const INSTRUCTORS = [
   {
@@ -149,6 +150,18 @@ export default function About() {
 
   return (
     <main>
+      <LoadingScreen
+        title={
+          <div className="relative z-10 flex h-full items-center justify-center text-white">
+            <h1 className="flex text-center font-ivy-ora-display text-4xl break-keep">
+              Inside the
+            </h1>
+            <span className="font-ivy-ora-display text-4xl break-keep italic">
+              &nbsp;sanctuary.
+            </span>
+          </div>
+        }
+      />
       <AboutHero />
 
       <section className="flex flex-col gap-12 px-4 py-12">

@@ -107,16 +107,7 @@ export default function ScrollZoomReveal({
             borderRadius,
             rotate,
           }}
-          className="
-            absolute
-            left-1/2
-            top-1/2
-            -translate-x-1/2
-            -translate-y-1/2
-            overflow-hidden
-            will-change-transform
-            transform-gpu
-          "
+          className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden will-change-transform transform-gpu"
         >
           {/* Image */}
           <motion.div
@@ -151,14 +142,7 @@ export default function ScrollZoomReveal({
             opacity: textOpacity,
             y: textY,
           }}
-          className="
-            absolute
-            inset-0
-            z-10
-            flex
-            items-center
-            justify-center
-          "
+          className=" absolute inset-0 z-10 flex items-center justify-center"
         >
           <div className="max-w-5xl px-8 text-center text-white flex-col flex justify-between items-center h-full py-20 pt-32">
             <h1 className="text-4xl font-ivy-ora-display break-keep text-center flex flex-col gap-2 md:flex-row">

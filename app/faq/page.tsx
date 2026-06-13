@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const NEW = [
   {
@@ -73,6 +74,18 @@ const PRICING = [
 export default function FAQ() {
   return (
     <div>
+      <LoadingScreen
+        title={
+          <div className="relative z-10 flex h-full items-center justify-center text-white">
+            <h1 className="flex text-center font-ivy-ora-display text-4xl break-keep">
+              Your questions,
+            </h1>
+            <span className="font-ivy-ora-display text-4xl break-keep italic">
+              &nbsp;answered.
+            </span>
+          </div>
+        }
+      />
       <div className="relative h-[65dvh] md:h-[60vh]">
         <div
           className="absolute inset-0 bg-position-[80%_1%] bg-size-[170%] md:bg-size-[130%] md:bg-position-[50%_40%] bg-no-repeat brightness-50 bg-[url('/assets/faq.jpg')] grayscale-100"
