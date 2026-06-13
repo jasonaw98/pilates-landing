@@ -147,7 +147,7 @@ export default function ClassPage() {
         bgPosition="object-[50%_100%]"
         content={
           <div className="max-w-5xl px-8 text-center text-white flex-col flex justify-between items-center h-full py-20 pt-32">
-            <div className="text-4xl h-full justify-center font-ivy-ora-display break-keep text-center items-center flex flex-col gap-2">
+            <div className="text-2xl md:text-4xl h-full justify-center font-ivy-ora-display break-keep text-center items-center flex flex-col gap-2">
               <div className="flex">
                 <p>A&nbsp;</p>
                 <p className="italic">breath-led</p>
@@ -159,13 +159,13 @@ export default function ClassPage() {
         }
       />
       <section>
-        <div className="flex justify-center items-center py-10">
-          <div className="flex text-taupe-700 flex-col">
+        <div className="flex justify-around md:justify-center items-center py-2 md:py-10">
+          <div className="flex text-taupe-700 flex-col text-xs md:text-base">
             <span className="font-nord">Duration</span>
             <span>50 mins</span>
           </div>
-          <span className="mx-12 h-10 w-px bg-neutral-300" />
-          <div className="flex text-taupe-700 flex-col">
+          <span className="md:mx-12 h-10 w-px bg-neutral-300" />
+          <div className="flex text-taupe-700 flex-col text-xs md:text-base">
             <span className="font-nord">Difficulty</span>
             <div className="flex items-center gap-2">
               Intermediate
@@ -176,8 +176,8 @@ export default function ClassPage() {
               </div>
             </div>
           </div>
-          <span className="mx-12 h-10 w-px bg-neutral-300" />
-          <div className="flex text-taupe-700 flex-col">
+          <span className="md:mx-12 h-10 w-px bg-neutral-300" />
+          <div className="flex text-taupe-700 flex-col text-xs md:text-base">
             <span className="font-nord">Group size</span>
             <span>Up to 6</span>
           </div>
@@ -185,7 +185,7 @@ export default function ClassPage() {
         <LineAnimation className="bg-neutral-300" />
       </section>
 
-      <section className="py-50">
+      <section className="py-50 px-6 lg:px-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -193,7 +193,7 @@ export default function ClassPage() {
           viewport={{ once: true, amount: 0.9 }}
           className="flex flex-col items-center justify-center text-center gap-16"
         >
-          <p className="font-ivy-ora-display text-2xl px-1 md:max-w-4xl md:text-4xl tracking-wide leading-12">
+          <p className="font-ivy-ora-display text-2xl px-1 md:max-w-4xl md:text-4xl tracking-wide md:leading-12">
             A steady-paced practice that links movement with breath through
             continuous flow. Designed to build
             <span className="italic">&nbsp;strength</span> and
