@@ -1,5 +1,6 @@
 "use client";
 import LoadingScreen from "@/components/LoadingScreen";
+import Link from "next/link";
 import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
@@ -39,6 +40,7 @@ const CLASSES = [
     name: "Pilates Fundamentals",
     category: "Pilates",
     image: "/assets/pilates_fundamentals.jpg",
+    href: "/class/fundamentals",
     level: "All Levels",
     objectPosition: "33% 80%",
     imageScale: 1,
@@ -47,6 +49,7 @@ const CLASSES = [
     name: "Reformer Pilates",
     category: "Pilates",
     image: "/assets/bendyoga.jpg",
+    href: "/class/reformer",
     level: "All Levels",
     objectPosition: "90% 100%",
     imageScale: 1,
@@ -55,6 +58,7 @@ const CLASSES = [
     name: "Slow Flow Yoga",
     category: "Yoga",
     image: "/instructor/lior.jpg",
+    href: "/class/slow-flow",
     level: "All Levels",
     objectPosition: "60% 80%",
     imageScale: 2,
@@ -63,6 +67,7 @@ const CLASSES = [
     name: "Yin Yoga",
     category: "Yoga",
     image: "/assets/mindful.png",
+    href: "/class/yin",
     level: "Hard",
     objectPosition: "33% 80%",
     imageScale: 1,
@@ -71,6 +76,7 @@ const CLASSES = [
     name: "Guided Meditation",
     category: "Meditation",
     image: "/assets/guided_meditation.jpg",
+    href: "/class/guided-meditation",
     level: "All Levels",
     objectPosition: "33% 100%",
     imageScale: 1,
@@ -79,6 +85,7 @@ const CLASSES = [
     name: "Soundbath Meditation",
     category: "Meditation",
     image: "/assets/soundbath.jpg",
+    href: "/class/soundbath",
     level: "All Levels",
     objectPosition: "33% 60%",
     imageScale: 1,
@@ -236,7 +243,7 @@ export default function Class() {
                   }}
                 />
                 <div className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap">
-                  View Class
+                  Learn More
                 </div>
               </div>
               <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
@@ -248,7 +255,7 @@ export default function Class() {
                 <span className="text-taupe-700 text-xs">/ month</span>
               </p>
 
-              <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group relative overflow-hidden">
+              <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group relative overflow-hidden cursor-pointer">
                 <span className="block h-full text-center transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                   BUY NOW
                 </span>
@@ -331,9 +338,12 @@ export default function Class() {
                       transformOrigin: classItem.objectPosition,
                     }}
                   />
-                  <div className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap">
+                  <Link
+                    href={classItem.href}
+                    className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap"
+                  >
                     View Class
-                  </div>
+                  </Link>
                 </div>
                 <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
                   {classItem.name}
@@ -351,11 +361,11 @@ export default function Class() {
                     MAX 6 PER GROUP
                   </span>
                 </div>
-                <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group relative overflow-hidden">
-                  <span className="block h-full text-center transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group/btn relative overflow-hidden cursor-pointer">
+                  <span className="block h-full text-center transition-all duration-300 group-hover/btn:-translate-y-full group-hover/btn:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                     BOOK NOW
                   </span>
-                  <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                  <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover/btn:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                     BOOK NOW
                   </span>
                 </div>

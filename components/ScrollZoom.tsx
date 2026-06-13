@@ -34,7 +34,7 @@ export default function ScrollZoomReveal({
    */
   const width = useTransform(progress, [0, 0.45], ["22vw", "100vw"]);
 
-  const height = useTransform(progress, [0, 0.45], ["65vh", "100vh"]);
+  const height = useTransform(progress, [0, 0.45], ["65dvh", "100dvh"]);
 
   /**
    * Rounded card -> fullscreen
@@ -78,7 +78,7 @@ export default function ScrollZoomReveal({
   const filter = useTransform(blur, (value) => `blur(${value}px)`);
 
   return (
-    <section ref={containerRef} className="relative h-[400vh]">
+    <section ref={containerRef} className="relative h-[400dvh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Background glow */}
         {/* <motion.div

@@ -10,7 +10,7 @@ interface LoadingScreenProps {
 
 export default function LoadingScreen({
   title,
-  duration = 2500,
+  duration = 1500,
 }: LoadingScreenProps) {
   const [visible, setVisible] = useState(true);
 

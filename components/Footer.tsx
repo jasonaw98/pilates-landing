@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ScrollZoomReveal from "./ScrollZoom";
+import LineAnimation from "./LineAnimation";
 
 export default function Footer() {
   const isMobile = useIsMobile();
@@ -123,13 +124,7 @@ export default function Footer() {
                   </button>
                 </div>
 
-                <motion.div
-                  className="h-px w-full origin-left bg-neutral-400"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true, amount: 0.9 }}
-                  transition={{ duration: 2.9, ease: [0.22, 1, 0.36, 1] }}
-                />
+                <LineAnimation/>
               </div>
 
               <div className="text-white text-sm pt-8">
