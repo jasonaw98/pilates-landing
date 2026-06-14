@@ -1,7 +1,15 @@
 "use client";
 
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const FACILITIES = [
@@ -37,95 +45,146 @@ const FACILITIES = [
   },
 ] as const;
 
+const ITEM_HEIGHT = 50;
+
 export default function OurFacilities() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const triggers = triggerRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (triggers.length === 0) return;
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const best = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!best) return;
-        const index = Number(best.target.getAttribute("data-index"));
-        if (!Number.isNaN(index)) setActiveIndex(index);
-      },
-      {
-        root: null,
-        rootMargin: "-42% 0px -42% 0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      },
-    );
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 50,
+  });
 
-    for (const trigger of triggers) observer.observe(trigger);
-    return () => observer.disconnect();
-  }, []);
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const nextIndex = Math.round(latest * (FACILITIES.length - 1));
+
+    setActiveIndex(nextIndex);
+  });
+
+  const listY = useTransform(
+    progress,
+    [0, 1],
+    [0, -(FACILITIES.length - 1) * ITEM_HEIGHT],
+  );
+
+  const progressHeight = useTransform(progress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section className="relative bg-[#F7F2EA]">
-      <div className="sticky top-0 z-10 flex h-[90dvh] min-h-140 flex-col px-6 pt-14 pb-8">
-        <h2 className="font-nord text-taupe-700 text-center text-sm uppercase tracking-[0.2em]">
-          Our Facilities
-        </h2>
+    <section
+      ref={containerRef}
+      className="relative h-[600vh] bg-[#F7F2EA] py-24"
+    >
+      <h2 className="sticky top-0 font-nord text-taupe-700 text-center text-xl md:text-3xl uppercase tracking-[0.2em] pt-10 md:pt-20">
+        Our Facilities
+      </h2>
+      <div className=" sticky top-0 flex h-screen items-center justify-center overflow-hidden pt-20">
+        <div className=" mx-auto grid w-full max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2">
+          {/* LEFT SIDE */}
+          <div className="relative flex items-center">
+            {/* Progress line */}
+            <div className="absolute left-0 top-0 h-full w-px bg-neutral-300">
+              <motion.div
+                style={{
+                  height: progressHeight,
+                }}
+                className="w-full bg-[#bc8b71]"
+              />
+            </div>
 
-        <ul
-          className="mt-10 flex flex-1 flex-col items-center justify-center gap-8"
-          aria-live="polite"
-        >
-          {FACILITIES.map((facility, index) => {
-            const isActive = index === activeIndex;
-            return (
-              <li
-                key={facility.name}
-                className={cn(
-                  "font-ivy-ora-display text-center text-[1.75rem] leading-tight transition-[color,opacity,font-style] duration-500 sm:text-4xl",
-                  isActive
-                    ? "text-[#2C1F18] italic opacity-100"
-                    : "text-[#B8B0A8] not-italic opacity-70",
-                )}
+            <div className="ml-10 mt-2 overflow-hidden">
+              <motion.ul
+                style={{
+                  y: listY,
+                }}
+                className="space-y-3 md:space-y-6"
               >
-                {facility.name}
-              </li>
-            );
-          })}
-        </ul>
+                {FACILITIES.map((facility, index) => {
+                  const isActive = index === activeIndex;
 
-        <div className="relative mx-auto mt-6 h-[300px] w-full max-w-xs shrink-0 overflow-hidden rounded-lg sm:max-w-sm">
-          {FACILITIES.map((facility, index) => (
-            <Image
-              key={facility.name}
-              src={facility.image}
-              alt={facility.name}
-              fill
-              sizes="(max-width: 768px) 90vw, 384px"
-              className={cn(
-                "object-cover transition-opacity duration-700 ease-out brightness-75",
-                index === activeIndex ? "opacity-100" : "opacity-0",
-              )}
-              style={{ objectPosition: facility.objectPosition }}
-              priority={index === 0}
-            />
-          ))}
+                  return (
+                    <motion.li
+                      key={facility.name}
+                      animate={{
+                        opacity: isActive ? 1 : 0.3,
+                        scale: isActive ? 1.05 : 1,
+                        x: isActive ? 16 : 0,
+                      }}
+                      transition={{
+                        duration: 0.4,
+                      }}
+                      className={cn(
+                        "font-ivy-ora-display text-3xl md:text-6xl",
+                        isActive ? "text-[#2C1F18] italic" : "text-[#A89F96]",
+                      )}
+                    >
+                      {facility.name}
+                    </motion.li>
+                  );
+                })}
+              </motion.ul>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE */}
+          <div className="flex items-center justify-center">
+            <div className=" relative h-90 md:h-125 w-full max-w-md overflow-hidden rounded-3xl">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{
+                    opacity: 0,
+                    scale: 1.08,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.95,
+                  }}
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    fill
+                    priority
+                    src={FACILITIES[activeIndex].image}
+                    alt={FACILITIES[activeIndex].name}
+                    className="object-cover"
+                  />
+
+                  <div className="absolute inset-0 bg-black/10" />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="relative z-0">
-        {FACILITIES.map((facility, index) => (
-          <div
-            key={facility.name}
-            ref={(el) => {
-              triggerRefs.current[index] = el;
-            }}
-            data-index={index}
-            className="h-dvh"
-            aria-hidden="true"
-          />
-        ))}
-      </div>
+      {/* Divider */}
+      <motion.div
+        className="absolute bottom-0 h-px w-full origin-left bg-neutral-400"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{
+          once: false,
+          amount: 0.9,
+        }}
+        transition={{
+          duration: 2,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      />
     </section>
   );
 }

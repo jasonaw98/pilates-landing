@@ -102,13 +102,13 @@ export default function Community() {
   return (
     <div className="">
       <div className="flex flex-col px-4 py-12 items-center justify-center text-center gap-16 h-[80dvh] max-w-4xl mx-auto">
-        <Carousel>
+        <Carousel className="">
           <CarouselContent>
             <CarouselItem className="flex flex-col items-center justify-center gap-16">
               <h1 className="font-nord text-taupe-700 text-lg uppercase">
                 From our community
               </h1>
-              <p className="font-ivy-ora-display text-4xl px-1">
+              <p className="font-ivy-ora-display text-2xl md:text-4xl px-1">
                 I didn't expect it to feel this different. More
                 <span className="italic">&nbsp;balanced</span> even after I've
                 left."
@@ -122,7 +122,7 @@ export default function Community() {
               <h1 className="font-nord text-taupe-700 text-lg uppercase">
                 From our community
               </h1>
-              <p className="font-ivy-ora-display text-4xl px-1">
+              <p className="font-ivy-ora-display text-2xl md:text-4xl px-1">
                 "It’s become something I look forward to each week. Not from
                 discipline, but
                 <span className="italic">&nbsp;desire</span>."
@@ -136,7 +136,7 @@ export default function Community() {
               <h1 className="font-nord text-taupe-700 text-lg uppercase">
                 From our community
               </h1>
-              <p className="font-ivy-ora-display text-4xl px-1">
+              <p className="font-ivy-ora-display text-2xl md:text-4xl px-1">
                 "It’s the one hour in my week that feels entirely mine. No
                 pressure, no noise, just space to{" "}
                 <span className="italic">move</span> and{" "}

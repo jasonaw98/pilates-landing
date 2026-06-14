@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import LoadingScreen from "@/components/LoadingScreen";
+import { cn } from "@/lib/utils";
 
 const INSTRUCTORS = [
   {
@@ -62,10 +63,152 @@ const INSTRUCTORS = [
   },
 ] as const;
 
+const FACILITIES = [
+  {
+    name: "Reformer Studio",
+    image: "/assets/bench.jpg",
+    objectPosition: "50% 40%",
+    scale: 1,
+  },
+  {
+    name: "Mat Studio",
+    image: "/assets/matstudio.jpg",
+    objectPosition: "50% 40%",
+    scale: 1,
+  },
+  {
+    name: "Recovery Lounge",
+    image: "/assets/sitting.jpg",
+    objectPosition: "50% 40%",
+    scale: 1,
+  },
+  {
+    name: "Onsen",
+    image: "/assets/onsen.jpg",
+    objectPosition: "50% 70%",
+    scale: 1,
+  },
+  {
+    name: "Outdoor Pool",
+    image: "/assets/pool.jpg",
+    objectPosition: "50% 40%",
+    scale: 1,
+  },
+  {
+    name: "Sauna",
+    image: "/assets/sauna.jpg",
+    objectPosition: "50% 40%",
+    scale: 1,
+  },
+] as const;
+
 const gridVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
+
+function HorizontalScroll() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  const titleOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.15, 0.3],
+    [1, 1, 0],
+    { clamp: true },
+  );
+
+  const titleY = useTransform(scrollYProgress, [0, 0.25], [0, -80], {
+    clamp: true,
+  });
+
+  const cardsY = useTransform(scrollYProgress, [0.1, 0.3], [200, 0], {
+    clamp: true,
+  });
+
+  const cardsOpacity = useTransform(
+    scrollYProgress,
+    [0.1, 0.2, 0.99],
+    [0, 1, 1],
+    {
+      clamp: true,
+    },
+  );
+
+  const x = useTransform(scrollYProgress, [0.3, 1], ["0%", "-70%"], {
+    clamp: true,
+  });
+
+  return (
+    <section ref={ref} className="relative h-[300vh]">
+      <div className="sticky top-0 h-screen overflow-hidden bg-[#F7F2EA]">
+        <motion.div
+          style={{
+            y: titleY,
+          }}
+          className="absolute top-40 left-1/2 -translate-x-1/2 text-center z-20"
+        >
+          <h2 className="mt-4 text-5xl md:text-7xl text-taupe-700 font-ivy-ora-display">
+            Our <span className="text-taupe-700 italic">Facilities</span>
+          </h2>
+        </motion.div>
+        <motion.div
+          style={{
+            x,
+            y: cardsY,
+            opacity: cardsOpacity,
+          }}
+          className="absolute top-1/2 flex gap-8 px-[15vw] -translate-y-1/2"
+        >
+          <motion.div className="flex w-full gap-x-6 overflow-x-auto scrollbar-none snap-x snap-mandatory">
+            {FACILITIES.map((classItem, index) => (
+              <motion.div
+                key={classItem.name}
+                className="group flex h-full flex-col gap-3 min-w-[320px] sm:min-w-96 lg:min-w-112.5 shrink-0 snap-start justify-end"
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 1, type: "spring" },
+                  },
+                }}
+              >
+                <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
+                  {classItem.name}
+                </h2>
+                <motion.div
+                  className={cn(
+                    "relative aspect-4/3 w-full overflow-hidden cursor-pointer group",
+                    index % 2 === 0 && "h-full aspect-3/4",
+                  )}
+                >
+                  <motion.div className="relative h-full w-full">
+                    <Image
+                      src={classItem.image}
+                      alt={classItem.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{
+                        objectPosition: classItem.objectPosition,
+                        transform: `scale(${classItem.scale})`,
+                        transformOrigin: classItem.objectPosition,
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
 function AboutHero() {
   const heroRef = useRef<HTMLElement>(null);
@@ -164,7 +307,7 @@ export default function About() {
       />
       <AboutHero />
 
-      <section className="flex flex-col gap-12 px-4 py-12">
+      <section className="flex flex-col gap-20 px-4 py-20">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -173,7 +316,7 @@ export default function About() {
           className="flex flex-col items-center justify-center gap-8 text-center md:py-10"
         >
           <h1 className="font-nord text-taupe-700 uppercase">Our Philosophy</h1>
-          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-3xl">
+          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-3xl md:leading-12">
             Wellness is not something to be achieved, but something to return
             to. At Forme, we see it as a quiet process of coming back to the
             body.
@@ -190,7 +333,7 @@ export default function About() {
           className="flex flex-col items-center justify-center gap-8 text-center md:py-10"
         >
           <h1 className="font-nord text-taupe-700 uppercase">The Space</h1>
-          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-3xl">
+          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-3xl md:leading-12">
             Forme is set along the cliffs of Uluwatu, where land meets the sea.
             An intimate sanctuary, shaped by light and nature. A place to move,
             to rest, and to return.
@@ -198,7 +341,9 @@ export default function About() {
         </motion.div>
       </section>
 
-      <section className="flex flex-col gap-5 px-5 py-10 lg:px-20">
+      <HorizontalScroll />
+
+      {/* <section className="flex flex-col gap-5 px-5 py-10 lg:px-20">
         <h2 className="font-ivy-ora-display text-2xl text-taupe-700">
           Recovery Lounge
         </h2>
@@ -211,7 +356,7 @@ export default function About() {
             className="object-cover object-[50%_60%]"
           />
         </div>
-      </section>
+      </section> */}
 
       <section className="flex flex-col gap-5 px-5 py-10 lg:px-20">
         <h2 className="font-ivy-ora-display text-3xl text-taupe-700">
