@@ -105,44 +105,44 @@ export default function Community() {
         <Carousel className="">
           <CarouselContent>
             <CarouselItem className="flex flex-col items-center justify-center gap-16">
-              <h1 className="font-nord text-taupe-700 text-lg uppercase">
+              <h1 className="font-nord text-taupe-700 text-h4 uppercase">
                 From our community
               </h1>
-              <p className="font-ivy-ora-display text-2xl md:text-4xl px-1">
+              <p className="font-ivy-ora-display text-2xl md:text-h2 px-1">
                 I didn't expect it to feel this different. More
                 <span className="italic">&nbsp;balanced</span> even after I've
                 left."
               </p>
-              <div className="flex flex-col items-center justify-center gap-1 font-nord text-taupe-700">
+              <div className="flex flex-col items-center justify-center gap-1 font-nord text-taupe-700 text-[16px]">
                 <p className="font-nord">Ethan L.</p>
                 <p className="text-sm">Member since 2025</p>
               </div>
             </CarouselItem>
             <CarouselItem className="flex flex-col items-center justify-center gap-16">
-              <h1 className="font-nord text-taupe-700 text-lg uppercase">
+              <h1 className="font-nord text-taupe-700 text-h4 uppercase">
                 From our community
               </h1>
-              <p className="font-ivy-ora-display text-2xl md:text-4xl px-1">
+              <p className="font-ivy-ora-display text-2xl md:text-h2 px-1">
                 "It’s become something I look forward to each week. Not from
                 discipline, but
                 <span className="italic">&nbsp;desire</span>."
               </p>
-              <div className="flex flex-col items-center justify-center gap-1 font-nord text-taupe-700">
+              <div className="flex flex-col items-center justify-center gap-1 font-nord text-taupe-700 text-[16px]">
                 <p className="font-nord">Clama m.</p>
                 <p className="text-sm">Member since 2025</p>
               </div>
             </CarouselItem>
             <CarouselItem className="flex flex-col items-center justify-center gap-16">
-              <h1 className="font-nord text-taupe-700 text-lg uppercase">
+              <h1 className="font-nord text-taupe-700 text-h4 uppercase">
                 From our community
               </h1>
-              <p className="font-ivy-ora-display text-2xl md:text-4xl px-1">
+              <p className="font-ivy-ora-display text-2xl md:text-h2 px-1">
                 "It’s the one hour in my week that feels entirely mine. No
                 pressure, no noise, just space to{" "}
                 <span className="italic">move</span> and{" "}
                 <span className="italic">reset</span>."
               </p>
-              <div className="flex flex-col items-center justify-center gap-1 font-nord text-taupe-700">
+              <div className="flex flex-col items-center justify-center gap-1 font-nord text-taupe-700 text-[16px]">
                 <p className="font-nord">Sarah L.</p>
                 <p className="text-sm">Member since 2025</p>
               </div>

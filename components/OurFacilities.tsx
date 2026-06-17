@@ -6,7 +6,6 @@ import {
   useMotionValueEvent,
   useScroll,
   useSpring,
-  useTransform,
 } from "motion/react";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -45,8 +44,6 @@ const FACILITIES = [
   },
 ] as const;
 
-const ITEM_HEIGHT = 50;
-
 export default function OurFacilities() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -57,53 +54,30 @@ export default function OurFacilities() {
   });
 
   const progress = useSpring(scrollYProgress, {
-    stiffness: 120,
+    stiffness: 250,
     damping: 50,
   });
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+  useMotionValueEvent(progress, "change", (latest) => {
     const nextIndex = Math.round(latest * (FACILITIES.length - 1));
 
     setActiveIndex(nextIndex);
   });
 
-  const listY = useTransform(
-    progress,
-    [0, 1],
-    [0, -(FACILITIES.length - 1) * ITEM_HEIGHT],
-  );
-
-  const progressHeight = useTransform(progress, [0, 1], ["0%", "100%"]);
-
   return (
     <section
       ref={containerRef}
-      className="relative h-[600vh] bg-[#F7F2EA] py-24"
+      className="relative h-[650vh] bg-[#F7F2EA] py-24"
     >
-      <h2 className="sticky top-0 font-nord text-taupe-700 text-center text-xl md:text-3xl uppercase tracking-[0.2em] pt-10 md:pt-20">
+      <h2 className="sticky top-0 font-nord text-taupe-700 text-center text-lg text-h4 md:text-3xl uppercase tracking-[0.2em] pt-10 md:pt-20">
         Our Facilities
       </h2>
       <div className=" sticky top-0 flex h-screen items-center justify-center overflow-hidden pt-20">
         <div className=" mx-auto grid w-full max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2">
           {/* LEFT SIDE */}
           <div className="relative flex items-center">
-            {/* Progress line */}
-            <div className="absolute left-0 top-0 h-full w-px bg-neutral-300">
-              <motion.div
-                style={{
-                  height: progressHeight,
-                }}
-                className="w-full bg-[#bc8b71]"
-              />
-            </div>
-
-            <div className="ml-10 mt-2 overflow-hidden">
-              <motion.ul
-                style={{
-                  y: listY,
-                }}
-                className="space-y-3 md:space-y-6"
-              >
+            <div className="mt-2 overflow-hidden text-center flex w-full">
+              <motion.ul className="space-y-3 md:space-y-6 flex flex-col justify-center items-center w-full">
                 {FACILITIES.map((facility, index) => {
                   const isActive = index === activeIndex;
 
@@ -113,13 +87,12 @@ export default function OurFacilities() {
                       animate={{
                         opacity: isActive ? 1 : 0.3,
                         scale: isActive ? 1.05 : 1,
-                        x: isActive ? 16 : 0,
                       }}
                       transition={{
                         duration: 0.4,
                       }}
                       className={cn(
-                        "font-ivy-ora-display text-3xl md:text-6xl",
+                        "font-ivy-ora-display text-3xl md:text-h2",
                         isActive ? "text-[#2C1F18] italic" : "text-[#A89F96]",
                       )}
                     >
@@ -134,7 +107,7 @@ export default function OurFacilities() {
           {/* RIGHT SIDE */}
           <div className="flex items-center justify-center">
             <div className=" relative h-90 md:h-125 w-full max-w-md overflow-hidden rounded-3xl">
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="sync">
                 <motion.div
                   key={activeIndex}
                   initial={{
@@ -150,7 +123,7 @@ export default function OurFacilities() {
                     scale: 0.95,
                   }}
                   transition={{
-                    duration: 0.7,
+                    duration: 0.4,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   className="absolute inset-0"

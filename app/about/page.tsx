@@ -114,13 +114,6 @@ function HorizontalScroll() {
     offset: ["start start", "end end"],
   });
 
-  const titleOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.15, 0.3],
-    [1, 1, 0],
-    { clamp: true },
-  );
-
   const titleY = useTransform(scrollYProgress, [0, 0.25], [0, -80], {
     clamp: true,
   });

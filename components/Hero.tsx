@@ -93,14 +93,14 @@ export default function Hero() {
         viewport={{ once: true, amount: 0.9 }}
         className="relative flex flex-col items-center justify-end md:items-start gap-4 text-white h-full pb-12 px-4 md:px-20 z-10"
       >
-        <h1 className="text-4xl font-ivy-ora-display break-keep text-left flex w-full">
+        <h1 className="text-4xl font-ivy-ora-display break-keep text-left flex w-full md:text-h1">
           A sanctuary for &nbsp;<p className="italic">stillness.</p>
         </h1>
         <p className="text-sm">
           More than a studio, Forme brings together movement, rest, and recovery
           in one considered space.
         </p>
-        <Button className="bg-white text-taupe-700 font-nord py-3 px-8 w-full md:w-auto rounded-full text-xs uppercase group relative overflow-hidden cursor-pointer">
+        <Button className="bg-white text-h4 text-taupe-700 font-nord py-2.5 px-6 w-full md:w-auto rounded-full text-xs uppercase group relative overflow-hidden cursor-pointer">
           <span className="block h-full transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
             BOOK NOW
           </span>

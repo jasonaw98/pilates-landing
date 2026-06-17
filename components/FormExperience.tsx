@@ -58,22 +58,6 @@ const containerVariants: Variants = {
   },
 };
 
-const classCardVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.18, delayChildren: 0.12 },
-  },
-};
-
-const imageRevealVariants: Variants = {
-  hidden: { clipPath: "inset(0 0 100% 0 round 0.375rem)" },
-  visible: {
-    clipPath: "inset(0 0 0% 0 round 0.375rem)",
-    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
 const imageZoomVariants: Variants = {
   hidden: { scale: 1.12 },
   visible: {
@@ -177,7 +161,7 @@ function HorizontalScroll() {
                 <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
                   {classItem.name}
                 </h2>
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-h4">
                   <span className="font-nord text-taupe-700 uppercase">
                     50 MINS
                   </span>
@@ -210,10 +194,10 @@ export default function FormExperience() {
           viewport={{ once: true, amount: 0.9 }}
           className="flex flex-col items-center justify-center text-center gap-16"
         >
-          <h1 className="font-nord text-taupe-700 text-xl uppercase">
+          <h1 className="font-nord text-taupe-700 text-xl uppercase text-h4">
             The Forme Experience
           </h1>
-          <p className="font-ivy-ora-display text-2xl px-1 md:max-w-3xl md:text-4xl tracking-wide">
+          <p className="font-ivy-ora-display text-2xl px-1 md:max-w-3xl md:text-h2 tracking-wide">
             Forme is designed to help you move, rest and return. A considered
             space where different approaches to wellness combine to help you
             feel at home in your

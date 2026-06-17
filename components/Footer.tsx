@@ -38,24 +38,29 @@ export default function Footer() {
 
       {isMobile ? (
         <div className="bg-[#3A1A12] px-6 pt-12 flex flex-col gap-8 border border-[#3A1A12]">
-          <h1 className="font-ivy-ora-display text-white text-3xl">
+          <h1 className="font-ivy-ora-display text-white text-h2">
             Be part of our <span className="italic">community</span>
           </h1>
 
-          <div className="flex items-center justify-between border-b pb-2">
+          <div className="flex items-center justify-between border-b pb-2 text-h4">
             <input
               type="email"
               placeholder="Email"
               className="bg-transparent p-1 w-full rounded-lg outline-none text-white text-sm placeholder:text-white placeholder:text-lg"
             />
-            <button className="font-nord text-white uppercase font-bold tracking-wider cursor-pointer">
+            <button
+              type="button"
+              className="font-nord text-white uppercase font-bold tracking-wider cursor-pointer"
+            >
               Submit
             </button>
           </div>
 
           <div className="flex gap-20">
             <div className="flex flex-col gap-1 text-white">
-              <h1 className="font-nord text-white uppercase pb-2">Menu</h1>
+              <h1 className="font-nord text-white uppercase pb-2 text-h4">
+                Menu
+              </h1>
               <Link
                 href="/"
                 className="hover:text-taupe-500 transition-colors duration-300 text-sm"
@@ -82,14 +87,16 @@ export default function Footer() {
               </Link>
             </div>
             <div className="flex flex-col gap-1 text-white">
-              <h1 className="font-nord text-white uppercase pb-2">Connect</h1>
+              <h1 className="font-nord text-white uppercase pb-2 text-h4">
+                Connect
+              </h1>
               <span className="text-sm">Instagram</span>
               <span className="text-sm">TikTok</span>
               <span className="text-sm">Facebook</span>
             </div>
           </div>
 
-          <div className="text-white text-sm">
+          <div className="text-white text-[12px]">
             <p>© 2026 Forme Pilates. all rights reserved.</p>
             <p>Powered by BUTTERSOFT</p>
           </div>
@@ -119,12 +126,15 @@ export default function Footer() {
                     placeholder="Email"
                     className="bg-transparent p-1 w-full rounded-lg outline-none text-white text-sm placeholder:text-white placeholder:text-sm"
                   />
-                  <button className="font-nord text-white uppercase font-bold tracking-wider cursor-pointer text-sm">
+                  <button
+                    type="button"
+                    className="font-nord text-white uppercase font-bold tracking-wider cursor-pointer text-sm"
+                  >
                     Submit
                   </button>
                 </div>
 
-                <LineAnimation/>
+                <LineAnimation />
               </div>
 
               <div className="text-white text-sm pt-8">

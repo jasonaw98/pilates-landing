@@ -56,6 +56,11 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --text-h1: 60px;
+  --text-h2: 40px;
+  --text-h3: 24px;
+  --text-h4: 14px;
+  --text-b1: 14px;
 }
 
 :root {

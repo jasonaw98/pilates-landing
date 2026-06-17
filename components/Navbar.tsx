@@ -1,5 +1,10 @@
 "use client";
-import { motion, type Variants } from "motion/react";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  type Variants,
+} from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -43,7 +48,7 @@ function MenuIcon({ open }: { open: boolean }) {
   return (
     <div
       aria-hidden="true"
-      className="relative flex h-[18px] w-8 items-center justify-center"
+      className="relative flex h-4.5 w-8 items-center justify-center"
     >
       <motion.span
         className="absolute block h-0.5 w-8 rounded-full bg-neutral-50"
@@ -68,9 +73,15 @@ function MenuIcon({ open }: { open: boolean }) {
 export default function Navbar() {
   const isMobile = useIsMobile();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 500);
+  });
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 px-1">
+    <div className="fixed top-0 left-0 right-0 z-50">
       {isMobile ? (
         <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           {/* Mobile */}
@@ -184,9 +195,12 @@ export default function Navbar() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.9 }}
-          className="hidden md:grid grid-cols-3 items-center p-10 text-white lg:px-20"
+          className={cn(
+            "hidden md:grid grid-cols-3 items-center p-10 md:pb-3 text-white lg:px-20 transition-all duration-300",
+            scrolled && "bg-[#F7F2EA] backdrop-blur-md text-taupe-700 pt-4",
+          )}
         >
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-10 text-h4">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href} className="font-nord">
                 {item.name}
@@ -196,7 +210,11 @@ export default function Navbar() {
           <div className="justify-self-center">
             <Link href="/">
               <Image
-                src="/logo/beige_wordmark.svg"
+                src={
+                  scrolled
+                    ? "/logo/brown_wordmark.svg"
+                    : "/logo/beige_wordmark.svg"
+                }
                 alt="logo"
                 width={100}
                 height={100}
@@ -206,7 +224,10 @@ export default function Navbar() {
           <div className="justify-self-end flex items-center gap-3">
             <Link
               href=""
-              className="border border-white font-nord py-3 px-5 rounded-full text-xs group relative overflow-hidden"
+              className={cn(
+                "border border-white font-nord py-2.5 px-6 rounded-full text-xs group relative overflow-hidden text-h4",
+                scrolled && "border-taupe-700",
+              )}
             >
               <span className="block h-full transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                 BOOK NOW
