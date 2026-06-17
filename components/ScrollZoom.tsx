@@ -123,7 +123,7 @@ export default function ScrollZoomReveal({
               fill
               priority
               sizes="100vw"
-              className="h-[110%] w-full object-cover scale-[1.2] object-[50%_80%]"
+              className="h-[110%] w-full object-cover scale-[1.2] object-[50%_100%]"
             />
           </motion.div>
 

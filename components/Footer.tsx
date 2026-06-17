@@ -101,13 +101,13 @@ export default function Footer() {
             <p>Powered by BUTTERSOFT</p>
           </div>
 
-          <div className="h-20">
+          <div className="h-full flex justify-center pt-4 w-full">
             <Image
-              src="/logo/brown_wordmark.svg"
+              src="/logo/forme_footer.png"
               alt="logo"
               width={1000}
-              height={80}
-              className="brightness-100 object-cover h-20 object-top"
+              height={100}
+              className="brightness-100 object-cover h-full object-top w-full"
             />
           </div>
         </div>
@@ -189,13 +189,13 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="h-full flex justify-center pt-16">
+          <div className="h-full flex justify-center pt-4 w-full">
             <Image
               src="/logo/forme_footer.png"
               alt="logo"
               width={1000}
               height={100}
-              className="brightness-100 object-cover h-full object-top"
+              className="brightness-100 object-cover h-full object-top w-full"
             />
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { motion, type Variants, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 
 const CLASSES = [
@@ -11,12 +12,14 @@ const CLASSES = [
     level: "All Levels",
     objectPosition: "33% 80%",
     imageScale: 1,
+    href: "/class/fundamentals",
   },
   {
     name: "Reformer Pilates",
     image: "/assets/bendyoga.jpg",
     level: "All Levels",
     objectPosition: "90% 100%",
+    href: "/class/reformer",
     imageScale: 1,
   },
   {
@@ -24,6 +27,7 @@ const CLASSES = [
     image: "/instructor/lior.jpg",
     level: "All Levels",
     objectPosition: "60% 80%",
+    href: "/class/slow-flow",
     imageScale: 2,
   },
   {
@@ -31,12 +35,14 @@ const CLASSES = [
     image: "/assets/mindful.png",
     level: "Hard",
     objectPosition: "33% 80%",
+    href: "/class/yin",
     imageScale: 1,
   },
   {
     name: "Guided Meditation",
     image: "/assets/guided_meditation.jpg",
     level: "All Levels",
+    href: "/class/guided-meditation",
     objectPosition: "33% 100%",
     imageScale: 1,
   },
@@ -44,6 +50,7 @@ const CLASSES = [
     name: "Soundbath Meditation",
     image: "/assets/soundbath.jpg",
     level: "All Levels",
+    href: "/class/soundbath",
     objectPosition: "33% 60%",
     imageScale: 1,
   },
@@ -75,8 +82,8 @@ function HorizontalScroll() {
 
   const titleOpacity = useTransform(
     scrollYProgress,
-    [0, 0.15, 0.3],
-    [1, 1, 0],
+    [0, 0.2, 1],
+    [1, 0, 0],
     { clamp: true },
   );
 
@@ -107,6 +114,7 @@ function HorizontalScroll() {
         <motion.div
           style={{
             y: titleY,
+            opacity: titleOpacity
           }}
           className="absolute top-40 left-1/2 -translate-x-1/2 text-center z-20"
         >
@@ -154,9 +162,9 @@ function HorizontalScroll() {
                       }}
                     />
                   </motion.div>
-                  <div className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap">
+                  <Link href={classItem.href} className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap">
                     View Class
-                  </div>
+                  </Link>
                 </motion.div>
                 <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
                   {classItem.name}

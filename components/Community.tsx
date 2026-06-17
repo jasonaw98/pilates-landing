@@ -102,14 +102,18 @@ export default function Community() {
   return (
     <div className="">
       <div className="flex flex-col px-4 py-12 items-center justify-center text-center gap-16 h-[80dvh] max-w-4xl mx-auto">
-        <Carousel className="">
+        <h1 className="font-nord text-taupe-700 text-h4 uppercase">
+          From our community
+        </h1>
+        <Carousel
+          opts={{
+            loop: true,
+          }}
+        >
           <CarouselContent>
             <CarouselItem className="flex flex-col items-center justify-center gap-16">
-              <h1 className="font-nord text-taupe-700 text-h4 uppercase">
-                From our community
-              </h1>
-              <p className="font-ivy-ora-display text-2xl md:text-h2 px-1">
-                I didn't expect it to feel this different. More
+              <p className="font-ivy-ora-display text-2xl md:text-h2 px-1 leading-[140%]">
+                I didn't expect it to feel this different. <br/>More
                 <span className="italic">&nbsp;balanced</span> even after I've
                 left."
               </p>
@@ -119,10 +123,7 @@ export default function Community() {
               </div>
             </CarouselItem>
             <CarouselItem className="flex flex-col items-center justify-center gap-16">
-              <h1 className="font-nord text-taupe-700 text-h4 uppercase">
-                From our community
-              </h1>
-              <p className="font-ivy-ora-display text-2xl md:text-h2 px-1">
+              <p className="font-ivy-ora-display text-2xl md:text-h2 px-1 leading-[140%]">
                 "It’s become something I look forward to each week. Not from
                 discipline, but
                 <span className="italic">&nbsp;desire</span>."
@@ -133,12 +134,9 @@ export default function Community() {
               </div>
             </CarouselItem>
             <CarouselItem className="flex flex-col items-center justify-center gap-16">
-              <h1 className="font-nord text-taupe-700 text-h4 uppercase">
-                From our community
-              </h1>
-              <p className="font-ivy-ora-display text-2xl md:text-h2 px-1">
-                "It’s the one hour in my week that feels entirely mine. No
-                pressure, no noise, just space to{" "}
+              <p className="font-ivy-ora-display text-2xl md:text-h2 px-1 leading-[140%]">
+                "It’s the one hour in my week that feels mine. <br/>
+                No pressure, no noise, just space to{" "}
                 <span className="italic">move</span> and{" "}
                 <span className="italic">reset</span>."
               </p>

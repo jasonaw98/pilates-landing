@@ -225,11 +225,16 @@ export default function Navbar() {
             <Link
               href=""
               className={cn(
-                "border border-white font-nord py-2.5 px-6 rounded-full text-xs group relative overflow-hidden text-h4",
-                scrolled && "border-taupe-700",
+                "border border-white font-nord py-2.5 px-6 text-white rounded-full text-xs group relative overflow-hidden text-h4 transition-all duration-300",
+                scrolled && "border-taupe-700 text-taupe-700",
               )}
             >
-              <span className="block h-full transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+              <span
+                className={cn(
+                  "block h-full text-white transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]",
+                  scrolled && "border-taupe-700 text-taupe-700",
+                )}
+              >
                 BOOK NOW
               </span>
               <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">

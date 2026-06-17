@@ -36,24 +36,25 @@ export default function LoadingScreen({
           }}
           className=" fixed inset-0 z-9999 flex items-center justify-center bg-[#3A1A12]"
         >
-          <motion.h1
-            initial={{
-              opacity: 0,
-              scale: 0.9,
-              y: 30,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 1.5,
-            }}
-            className="text-5xl md:text-8xl text-white"
-          >
-            {title}
-          </motion.h1>
+          <div className="overflow-hidden">
+            <motion.h1
+              initial={{
+                y: "100%",
+                opacity: 0,
+              }}
+              animate={{
+                y: "0%",
+                opacity: 1,
+              }}
+              transition={{
+                duration: 1.3,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="text-5xl md:text-8xl text-white will-change-transform"
+            >
+              {title}
+            </motion.h1>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
