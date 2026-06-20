@@ -47,11 +47,6 @@ export default function ScrollZoomReveal({
   const rotate = useTransform(progress, [0, 0.5], [0, 0]);
 
   /**
-   * Floating card shadow
-   */
-  const shadowOpacity = useTransform(progress, [0, 0.45], [0.45, 0]);
-
-  /**
    * Image movement
    */
   const imageScale = useTransform(progress, [0, 1], [1.25, 1]);
@@ -73,9 +68,6 @@ export default function ScrollZoomReveal({
   /**
    * Background blur
    */
-  const blur = useTransform(progress, [0, 0.25], [12, 0]);
-
-  const filter = useTransform(blur, (value) => `blur(${value}px)`);
 
   return (
     <section ref={containerRef} className="relative h-[400dvh]">
@@ -123,7 +115,7 @@ export default function ScrollZoomReveal({
               fill
               priority
               sizes="100vw"
-              className="h-[110%] w-full object-cover scale-[1.2] object-[50%_100%]"
+              className="h-[110%] w-full object-cover scale-[1.4] object-[50%_100%]"
             />
           </motion.div>
 
@@ -144,7 +136,7 @@ export default function ScrollZoomReveal({
           }}
           className=" absolute inset-0 z-10 flex items-center justify-center"
         >
-          <div className="max-w-5xl px-8 text-center text-white flex-col flex justify-between items-center h-full py-20 pt-32">
+          <div className="max-w-5xl px-8 text-center text-white flex-col flex justify-between items-center h-full py-20 pt-36">
             <h1 className="text-h2 font-ivy-ora-display break-keep text-center flex flex-col gap-2 md:flex-row">
               <p>Begin your</p>
               <div className="flex">

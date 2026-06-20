@@ -1,40 +1,19 @@
 "use client";
-import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/use-mobile";
-import ScrollZoomReveal from "./ScrollZoom";
 import LineAnimation from "./LineAnimation";
+import ScrollZoomReveal from "./ScrollZoom";
 
 export default function Footer() {
   const isMobile = useIsMobile();
 
   return (
     <main>
-      <ScrollZoomReveal image="/assets/nav_sheet.jpg" title="Explore Beyond" />
-      {/* <div className="h-[60vh] relative">
-        <div
-          className="h-full absolute inset-0 bg-position-[50%_80%] bg-size-[350%] md:bg-size-[200%] bg-no-repeat brightness-45 bg-[url('/assets/nav_sheet.jpg')] saturate-90 grayscale-20"
-          aria-hidden="true"
-        />
-        <div className="relative flex flex-col items-center justify-between text-white h-full py-10 px-6 z-10 md:pt-24">
-          <h1 className="text-4xl font-ivy-ora-display break-keep text-center flex flex-col gap-2 md:flex-row">
-            <p>Begin your</p>
-            <div className="flex">
-              <p className="italic">wellness</p>
-              <p>&nbsp;journey.</p>
-            </div>
-          </h1>
-          <div className="font-nord text-taupe-700 bg-[#F7F2EA] rounded-full w-full text-center py-2 uppercase text-xs md:max-w-xs cursor-pointer group relative overflow-hidden">
-            <span className="block h-full transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
-              Book your first class
-            </span>
-            <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
-              Book your first class
-            </span>
-          </div>
-        </div>
-      </div> */}
+      <ScrollZoomReveal
+        image="/assets/footer_image.png"
+        title="Explore Beyond"
+      />
 
       {isMobile ? (
         <div className="bg-[#3A1A12] px-6 pt-12 flex flex-col gap-8 border border-[#3A1A12]">

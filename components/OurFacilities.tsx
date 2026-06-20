@@ -14,33 +14,54 @@ import { cn } from "@/lib/utils";
 const FACILITIES = [
   {
     name: "Reformer Studio",
-    image: "/assets/pilates_fundamentals.jpg",
-    objectPosition: "50% 75%",
+    image: "/facilities/81.png",
   },
   {
     name: "Mat Studio",
-    image: "/assets/bendyoga.jpg",
-    objectPosition: "50% 50%",
+    image: "/facilities/81-2.png",
   },
   {
     name: "Recovery Lounge",
-    image: "/assets/sitting.jpg",
-    objectPosition: "50% 60%",
+    image: "/facilities/81-4.png",
   },
   {
     name: "Onsen",
-    image: "/assets/nav_sheet.jpg",
-    objectPosition: "50% 80%",
+    image: "/facilities/81-6.png",
   },
   {
     name: "Pool",
-    image: "/assets/pool.jpg",
-    objectPosition: "40% center",
+    image: "/facilities/81-8.png",
   },
   {
     name: "Sauna",
-    image: "/assets/chair.jpg",
-    objectPosition: "50% 50%",
+    image: "/facilities/81-10.png",
+  },
+] as const;
+
+const FACILITIES_2 = [
+  {
+    name: "Reformer Studio",
+    image: "/facilities/81-1.png",
+  },
+  {
+    name: "Mat Studio",
+    image: "/facilities/81-3.png",
+  },
+  {
+    name: "Recovery Lounge",
+    image: "/facilities/81-5.png",
+  },
+  {
+    name: "Onsen",
+    image: "/facilities/81-7.png",
+  },
+  {
+    name: "Pool",
+    image: "/facilities/81-9.png",
+  },
+  {
+    name: "Sauna",
+    image: "/facilities/81-11.png",
   },
 ] as const;
 
@@ -73,8 +94,46 @@ export default function OurFacilities() {
         Our Facilities
       </h2>
       <div className=" sticky top-0 flex h-screen items-center justify-center overflow-hidden pt-20">
-        <div className=" mx-auto grid w-full max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2 xl:grid-cols-3 xl:max-w-[90vw] xl:h-[70vh] xl:px-0">
           {/* LEFT SIDE */}
+          <div className="hidden xl:flex justify-start items-start">
+            <div className=" relative h-90 md:h-125 xl:h-90 w-full max-w-md overflow-hidden rounded-3xl">
+              <AnimatePresence mode="sync">
+                <motion.div
+                  key={activeIndex}
+                  initial={{
+                    opacity: 0,
+                    scale: 1.08,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.95,
+                  }}
+                  transition={{
+                    duration: 0.4,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    fill
+                    priority
+                    src={FACILITIES[activeIndex].image}
+                    alt={FACILITIES[activeIndex].name}
+                    className="object-cover"
+                  />
+
+                  <div className="absolute inset-0 bg-black/10" />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Text Side */}
           <div className="relative flex items-center">
             <div className="mt-2 overflow-hidden text-center flex w-full">
               <motion.ul className="space-y-3 md:space-y-6 flex flex-col justify-center items-center w-full">
@@ -105,8 +164,8 @@ export default function OurFacilities() {
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="flex items-center justify-center">
-            <div className=" relative h-90 md:h-125 w-full max-w-md overflow-hidden rounded-3xl">
+          <div className="flex items-center justify-center xl:items-end">
+            <div className=" relative h-90 md:h-125 xl:h-90 w-full max-w-md overflow-hidden rounded-3xl">
               <AnimatePresence mode="sync">
                 <motion.div
                   key={activeIndex}
@@ -131,8 +190,8 @@ export default function OurFacilities() {
                   <Image
                     fill
                     priority
-                    src={FACILITIES[activeIndex].image}
-                    alt={FACILITIES[activeIndex].name}
+                    src={FACILITIES_2[activeIndex].image}
+                    alt={FACILITIES_2[activeIndex].name}
                     className="object-cover"
                   />
 

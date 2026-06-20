@@ -44,14 +44,17 @@ const navigation = [
   },
 ];
 
-function MenuIcon({ open }: { open: boolean }) {
+function MenuIcon({ open, scrolled }: { open: boolean; scrolled: boolean }) {
   return (
     <div
       aria-hidden="true"
       className="relative flex h-4.5 w-8 items-center justify-center"
     >
       <motion.span
-        className="absolute block h-0.5 w-8 rounded-full bg-neutral-50"
+        className={cn(
+          "absolute block h-0.5 w-8 rounded-full bg-neutral-50",
+          scrolled && "bg-taupe-700",
+        )}
         animate={{
           rotate: open ? 45 : 0,
           y: open ? 0 : -5,
@@ -59,7 +62,10 @@ function MenuIcon({ open }: { open: boolean }) {
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       />
       <motion.span
-        className="absolute block h-0.5 w-8 rounded-full bg-neutral-50"
+        className={cn(
+          "absolute block h-0.5 w-8 rounded-full bg-neutral-50",
+          scrolled && "bg-taupe-700",
+        )}
         animate={{
           rotate: open ? -45 : 0,
           y: open ? 0 : 5,
@@ -77,7 +83,7 @@ export default function Navbar() {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 500);
+    setScrolled(latest > 300);
   });
 
   return (
@@ -85,10 +91,20 @@ export default function Navbar() {
       {isMobile ? (
         <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           {/* Mobile */}
-          <nav className="flex justify-between items-center px-4 py-7 md:hidden">
+          <nav
+            className={cn(
+              "flex justify-between items-center px-5 py-7 md:hidden transition-all duration-300",
+              scrolled &&
+                "bg-[#F7F2EA] backdrop-blur-md text-taupe-700 border-b-2  border-taupe-700",
+            )}
+          >
             <Link href="/">
               <Image
-                src="/logo/beige_wordmark.svg"
+                src={
+                  scrolled
+                    ? "/logo/brown_wordmark.svg"
+                    : "/logo/beige_wordmark.svg"
+                }
                 alt="logo"
                 width={100}
                 height={100}
@@ -97,7 +113,10 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/"
-                className="border border-neutral-100 py-3 px-5 rounded-full font-nord text-xs text-white"
+                className={cn(
+                  "border border-neutral-100 py-3 px-5 rounded-full font-nord text-xs text-white",
+                  scrolled && "border-taupe-700 text-taupe-700",
+                )}
               >
                 BOOK NOW
               </Link>
@@ -105,7 +124,7 @@ export default function Navbar() {
                 className="cursor-pointer"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
               >
-                <MenuIcon open={menuOpen} />
+                <MenuIcon open={menuOpen} scrolled={scrolled} />
               </SheetTrigger>
             </div>
           </nav>
@@ -196,8 +215,9 @@ export default function Navbar() {
           whileInView="visible"
           viewport={{ once: false, amount: 0.9 }}
           className={cn(
-            "hidden md:grid grid-cols-3 items-center p-10 md:pb-3 text-white lg:px-20 transition-all duration-300",
-            scrolled && "bg-[#F7F2EA] backdrop-blur-md text-taupe-700 pt-4",
+            "hidden md:grid grid-cols-3 items-center p-10 md:pb-3 text-white lg:px-20 transition-all duration-500",
+            scrolled &&
+              "bg-[#F7F2EA] backdrop-blur-md text-taupe-700 pt-4 border-b-2  border-taupe-700",
           )}
         >
           <div className="flex items-center gap-10 text-h4">

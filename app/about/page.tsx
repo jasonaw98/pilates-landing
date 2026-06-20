@@ -114,6 +114,13 @@ function HorizontalScroll() {
     offset: ["start start", "end end"],
   });
 
+  const titleOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 1],
+    [1, 0, 0],
+    { clamp: true },
+  );
+
   const titleY = useTransform(scrollYProgress, [0, 0.25], [0, -80], {
     clamp: true,
   });
@@ -141,6 +148,7 @@ function HorizontalScroll() {
         <motion.div
           style={{
             y: titleY,
+            opacity: titleOpacity,
           }}
           className="absolute top-40 left-1/2 -translate-x-1/2 text-center z-20"
         >
