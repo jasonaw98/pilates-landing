@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
-export default function LineAnimation({className}: {className?: string}) {
+export default function LineAnimation({ className }: { className?: string }) {
   return (
     <motion.div
       className={cn("h-px w-full origin-left bg-neutral-400", className)}

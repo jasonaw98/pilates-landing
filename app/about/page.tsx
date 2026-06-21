@@ -2,8 +2,8 @@
 import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 import LoadingScreen from "@/components/LoadingScreen";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 const INSTRUCTORS = [
@@ -114,12 +114,9 @@ function HorizontalScroll() {
     offset: ["start start", "end end"],
   });
 
-  const titleOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.2, 1],
-    [1, 0, 0],
-    { clamp: true },
-  );
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [1, 0, 0], {
+    clamp: true,
+  });
 
   const titleY = useTransform(scrollYProgress, [0, 0.25], [0, -80], {
     clamp: true,

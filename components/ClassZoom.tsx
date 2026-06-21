@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import Image from "next/image";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -70,7 +70,6 @@ export default function ClassZoomReveal({
 
   const textY = useTransform(progress, [0.25, 0.75], [60, 0]);
 
-
   return (
     <section ref={containerRef} className="relative h-[300dvh]">
       <div className="sticky top-0 h-screen overflow-hidden">
@@ -98,7 +97,10 @@ export default function ClassZoomReveal({
               fill
               priority
               sizes="100vw"
-              className={cn("h-[110%] w-full object-cover brightness-40 grayscale-5 scale-[1.2]", bgPosition)}
+              className={cn(
+                "h-[110%] w-full object-cover brightness-40 grayscale-5 scale-[1.2]",
+                bgPosition,
+              )}
             />
           </motion.div>
 

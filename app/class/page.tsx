@@ -1,9 +1,9 @@
 "use client";
-import LoadingScreen from "@/components/LoadingScreen";
-import Link from "next/link";
 import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const PACKAGES = [
   {

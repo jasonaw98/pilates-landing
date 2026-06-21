@@ -1,10 +1,10 @@
-import Community from "@/components/Community";
+import Image from "next/image";
 import FormExperience from "@/components/FormExperience";
 import Hero from "@/components/Hero";
 import LoadingScreen from "@/components/LoadingScreen";
 import MoreThanJust from "@/components/MoreThanJust";
 import OurFacilities from "@/components/OurFacilities";
-import Image from "next/image";
+import UnmaskLayers from "@/components/WrapCommunity";
 
 export default function Home() {
   return (
@@ -23,7 +23,7 @@ export default function Home() {
       <FormExperience />
       <MoreThanJust />
       <OurFacilities />
-      <Community />
+      <UnmaskLayers />
     </div>
   );
 }

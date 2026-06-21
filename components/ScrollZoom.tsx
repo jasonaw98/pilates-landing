@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import Image from "next/image";
 import { useRef } from "react";
 
 interface ScrollZoomRevealProps {
@@ -70,7 +70,7 @@ export default function ScrollZoomReveal({
    */
 
   return (
-    <section ref={containerRef} className="relative h-[400dvh]">
+    <section ref={containerRef} className="relative h-[400dvh] bg-[#3A1A12]">
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Background glow */}
         {/* <motion.div
@@ -145,7 +145,7 @@ export default function ScrollZoomReveal({
               </div>
             </h1>
 
-            <div className="font-nord text-taupe-700 bg-[#F7F2EA] rounded-full w-full text-center py-2 uppercase text-xs md:max-w-xs cursor-pointer group relative overflow-hidden">
+            <div className="font-nord text-taupe-700 bg-[#F7F2EA] rounded-full w-full text-center py-2.5 px-6 uppercase text-xs md:max-w-xs cursor-pointer group relative overflow-hidden">
               <span className="block h-full transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                 Book your first class
               </span>

@@ -114,7 +114,7 @@ export default function Navbar() {
               <Link
                 href="/"
                 className={cn(
-                  "border border-neutral-100 py-3 px-5 rounded-full font-nord text-xs text-white",
+                  "border border-neutral-100 py-2.5 px-6 rounded-full font-nord text-xs text-white",
                   scrolled && "border-taupe-700 text-taupe-700",
                 )}
               >
@@ -150,7 +150,7 @@ export default function Navbar() {
                   <SheetClose className={cn("cursor-pointer")}>
                     <Link
                       href=""
-                      className="border border-taupe-700 text-taupe-700 font-nord py-3 px-5 rounded-full text-xs"
+                      className="border border-taupe-700 text-taupe-700 font-nord py-2.5 px-6 rounded-full text-xs"
                     >
                       BOOK NOW
                     </Link>

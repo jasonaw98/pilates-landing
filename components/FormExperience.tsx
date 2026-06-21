@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -80,12 +80,9 @@ function HorizontalScroll() {
     offset: ["start start", "end end"],
   });
 
-  const titleOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.2, 1],
-    [1, 0, 0],
-    { clamp: true },
-  );
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [1, 0, 0], {
+    clamp: true,
+  });
 
   const titleY = useTransform(scrollYProgress, [0, 0.25], [0, -80], {
     clamp: true,
@@ -114,7 +111,7 @@ function HorizontalScroll() {
         <motion.div
           style={{
             y: titleY,
-            opacity: titleOpacity
+            opacity: titleOpacity,
           }}
           className="absolute top-40 left-1/2 -translate-x-1/2 text-center z-20"
         >
@@ -162,7 +159,10 @@ function HorizontalScroll() {
                       }}
                     />
                   </motion.div>
-                  <Link href={classItem.href} className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap">
+                  <Link
+                    href={classItem.href}
+                    className="absolute inset-0 hidden items-center justify-center bg-black/50 font-nord text-lg text-white uppercase underline underline-offset-2 group-hover:flex whitespace-nowrap"
+                  >
                     View Class
                   </Link>
                 </motion.div>

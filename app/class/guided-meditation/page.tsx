@@ -1,24 +1,24 @@
 "use client";
-import ClassZoomReveal from "@/components/ClassZoom";
-import LineAnimation from "@/components/LineAnimation";
 import { ArrowLeft } from "lucide-react";
 import { motion, type Variants } from "motion/react";
-import Link from "next/link";
 import Image from "next/image";
-import { useIsMobile } from "@/hooks/use-mobile";
+import Link from "next/link";
+import ClassZoomReveal from "@/components/ClassZoom";
+import { CustomCarouselControls } from "@/components/Community";
+import LineAnimation from "@/components/LineAnimation";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { cn } from "@/lib/utils";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { CustomCarouselControls } from "@/components/Community";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -175,7 +175,7 @@ export default function ClassPage() {
               </div>
             </div>
           </div>
-         <span className="md:mx-12 h-10 w-px bg-neutral-300" />
+          <span className="md:mx-12 h-10 w-px bg-neutral-300" />
           <div className="flex text-taupe-700 flex-col text-xs md:text-base">
             <span className="font-nord">Group size</span>
             <span>Up to 6</span>
@@ -316,8 +316,8 @@ export default function ClassPage() {
           </h1>
           <Carousel>
             <CarouselContent>
-              {groupedClasses.map((classPair, sideIndex) => (
-                <CarouselItem key={sideIndex}>
+              {groupedClasses.map((classPair) => (
+                <CarouselItem key={`${classPair[0].name}-${classPair[1].name}`}>
                   <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6">
                     {classPair.map((classItem) => (
                       <motion.div

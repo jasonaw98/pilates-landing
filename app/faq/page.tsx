@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "motion/react";
+import LoadingScreen from "@/components/LoadingScreen";
 import {
   Accordion,
   AccordionContent,
@@ -7,7 +8,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
-import LoadingScreen from "@/components/LoadingScreen";
 
 const NEW = [
   {
