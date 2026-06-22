@@ -4,7 +4,7 @@ import Hero from "@/components/Hero";
 import LoadingScreen from "@/components/LoadingScreen";
 import MoreThanJust from "@/components/MoreThanJust";
 import OurFacilities from "@/components/OurFacilities";
-import UnmaskLayers from "@/components/WrapCommunity";
+import UnmaskLayers from "@/components/UnmaskLayers";
 
 export default function Home() {
   return (
