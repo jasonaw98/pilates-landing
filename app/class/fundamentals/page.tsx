@@ -319,7 +319,7 @@ export default function ClassPage() {
           <Carousel>
             <CarouselContent>
               {groupedClasses.map((classPair) => (
-                <CarouselItem key={`${classPair[0].name}-${classPair[1].name}`}>
+                <CarouselItem key={classPair.join("-")}>
                   <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6">
                     {classPair.map((classItem) => (
                       <motion.div
