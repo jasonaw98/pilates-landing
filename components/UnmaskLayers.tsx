@@ -19,7 +19,7 @@ export default function UnmaskLayers() {
   const gridProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <div ref={containerRef} className="relative min-h-[300vh]">
+    <div ref={containerRef} className="relative min-h-[300dvh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         <div className="absolute inset-0 z-10">
           <div className="relative h-full w-full">

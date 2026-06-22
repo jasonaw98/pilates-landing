@@ -95,7 +95,7 @@ export default function Navbar() {
             className={cn(
               "flex justify-between items-center px-5 py-7 md:hidden transition-all duration-300",
               scrolled &&
-                "bg-[#F7F2EA] backdrop-blur-md text-taupe-700 border-b-2  border-taupe-700",
+                "bg-[#F7F2EA] backdrop-blur-md text-taupe-700 border-b border-taupe-700 pt-4 pb-3",
             )}
           >
             <Link href="/">

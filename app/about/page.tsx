@@ -140,7 +140,7 @@ function HorizontalScroll() {
   });
 
   return (
-    <section ref={ref} className="relative h-[300vh]">
+    <section ref={ref} className="relative h-[300dvh]">
       <div className="sticky top-0 h-screen overflow-hidden bg-[#F7F2EA]">
         <motion.div
           style={{

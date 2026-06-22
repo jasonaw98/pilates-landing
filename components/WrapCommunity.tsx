@@ -18,7 +18,7 @@ export default function UnmaskLayers() {
   const layer3Y = useTransform(scrollYProgress, [0.6, 1], [1000, 0]);
 
   return (
-    <div ref={containerRef} className="relative min-h-[300vh]">
+    <div ref={containerRef} className="relative min-h-[300dvh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-red-600">
           <div className="relative h-full w-full text-center text-white">

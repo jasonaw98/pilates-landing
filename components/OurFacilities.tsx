@@ -88,13 +88,13 @@ export default function OurFacilities() {
   return (
     <section
       ref={containerRef}
-      className="relative h-[650vh] bg-[#F7F2EA] py-24"
+      className="relative h-[650dvh] bg-[#F7F2EA] py-24"
     >
       <h2 className="sticky top-0 font-nord text-taupe-700 text-center text-lg text-h4 md:text-3xl uppercase tracking-[0.2em] pt-10 md:pt-20">
         Our Facilities
       </h2>
       <div className=" sticky top-0 flex h-screen items-center justify-center overflow-hidden pt-20">
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2 xl:grid-cols-3 xl:max-w-[90vw] xl:h-[70vh] xl:px-0">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-2 md:gap-16 px-6 lg:grid-cols-2 xl:grid-cols-3 xl:max-w-[90vw] xl:h-[70dvh] xl:px-0">
           {/* LEFT SIDE */}
           <div className="hidden xl:flex justify-start items-start">
             <div className=" relative h-90 md:h-125 xl:h-90 w-full max-w-md overflow-hidden rounded-3xl">
@@ -151,7 +151,7 @@ export default function OurFacilities() {
                         duration: 0.4,
                       }}
                       className={cn(
-                        "font-ivy-ora-display text-3xl md:text-h2",
+                        "font-ivy-ora-display text-2xl md:text-3xl md:text-h2",
                         isActive ? "text-[#2C1F18] italic" : "text-[#A89F96]",
                       )}
                     >
@@ -165,7 +165,7 @@ export default function OurFacilities() {
 
           {/* RIGHT SIDE */}
           <div className="flex items-center justify-center xl:items-end">
-            <div className=" relative h-90 md:h-125 xl:h-90 w-full max-w-md overflow-hidden rounded-3xl">
+            <div className=" relative h-80 md:h-125 xl:h-90 w-full max-w-md overflow-hidden rounded-3xl">
               <AnimatePresence mode="sync">
                 <motion.div
                   key={activeIndex}
