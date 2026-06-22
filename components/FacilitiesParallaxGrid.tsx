@@ -64,7 +64,7 @@ function GridColumn({
               width={1000}
               height={1000}
               sizes="33vw"
-              className="h-full w-full object-cover object-center"
+              className="h-full w-full object-cover object-center transform-gpu"
             />
           </div>
         );

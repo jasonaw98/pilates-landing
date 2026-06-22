@@ -151,7 +151,7 @@ export default function OurFacilities() {
                         duration: 0.4,
                       }}
                       className={cn(
-                        "font-ivy-ora-display text-2xl md:text-3xl md:text-h2",
+                        "font-ivy-ora-display text-2xl md:text-3xl md:text-h2 transform-gpu",
                         isActive ? "text-[#2C1F18] italic" : "text-[#A89F96]",
                       )}
                     >
@@ -165,7 +165,7 @@ export default function OurFacilities() {
 
           {/* RIGHT SIDE */}
           <div className="flex items-center justify-center xl:items-end">
-            <div className=" relative h-80 md:h-125 xl:h-90 w-full max-w-md overflow-hidden rounded-3xl">
+            <div className=" relative h-80 md:h-125 xl:h-90 w-full max-w-md overflow-hidden rounded-3xl transform-gpu">
               <AnimatePresence mode="sync">
                 <motion.div
                   key={activeIndex}

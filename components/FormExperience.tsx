@@ -127,11 +127,11 @@ function HorizontalScroll() {
           }}
           className="absolute top-1/2 flex gap-8 px-[15vw] -translate-y-1/2"
         >
-          <motion.div className="flex w-full gap-x-6 overflow-x-auto scrollbar-none snap-x snap-mandatory">
+          <motion.div className="flex w-full gap-x-6 overflow-x-auto scrollbar-none snap-x snap-mandatory transform-gpu">
             {CLASSES.map((classItem) => (
               <motion.div
                 key={classItem.name}
-                className="group flex h-full flex-col gap-3 min-w-[320px] sm:min-w-96 lg:min-w-112.5 shrink-0 snap-start"
+                className="group flex h-full flex-col gap-3 min-w-[320px] sm:min-w-96 lg:min-w-112.5 shrink-0 snap-start transform-gpu"
                 variants={{
                   hidden: { opacity: 0, y: 30 },
                   visible: {
@@ -141,7 +141,7 @@ function HorizontalScroll() {
                   },
                 }}
               >
-                <motion.div className="relative aspect-4/3 w-full overflow-hidden brightness-90 grayscale-25 cursor-pointer group">
+                <motion.div className="relative aspect-4/3 w-full overflow-hidden brightness-90 grayscale-25 cursor-pointer group transform-gpu">
                   <motion.div
                     variants={imageZoomVariants}
                     className="relative h-full w-full"
@@ -151,7 +151,7 @@ function HorizontalScroll() {
                       alt={classItem.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105 transform-gpu"
                       style={{
                         objectPosition: classItem.objectPosition,
                         transform: `scale(${classItem.imageScale})`,
@@ -166,7 +166,7 @@ function HorizontalScroll() {
                     View Class
                   </Link>
                 </motion.div>
-                <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
+                <h2 className="font-ivy-ora-display text-taupe-700 text-2xl transform-gpu">
                   {classItem.name}
                 </h2>
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-h4">
