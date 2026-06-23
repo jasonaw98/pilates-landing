@@ -92,10 +92,10 @@ export default function FAQ() {
           aria-hidden="true"
         />
         <div className="relative flex flex-col md:flex-row items-center justify-center text-white h-full z-10">
-          <h1 className="text-4xl font-ivy-ora-display break-keep text-center flex">
+          <h1 className="text-4xl font-ivy-ora-display md:text-h1 break-keep text-center flex">
             Frequently Asked
           </h1>
-          <span className="text-4xl font-ivy-ora-display break-keep italic">
+          <span className="text-4xl font-ivy-ora-display md:text-h1 break-keep italic">
             &nbsp;Questions
           </span>
         </div>
@@ -108,14 +108,14 @@ export default function FAQ() {
         className="px-4 py-12 flex flex-col gap-12 lg:px-24"
       >
         <div className="flex flex-col gap-5">
-          <h1 className="font-ivy-ora-display text-taupe-700 text-2xl">
+          <h1 className="font-ivy-ora-display text-taupe-700 text-2xl md:text-h2">
             New to Forme
           </h1>
           <Accordion className={cn("border-none")}>
             {NEW.map((item) => (
               <AccordionItem key={item.value} value={item.value}>
                 <AccordionTrigger
-                  className={cn("text-taupe-700 text-base px-0")}
+                  className={cn("text-taupe-700 text-xl px-0")}
                 >
                   {item.question}
                 </AccordionTrigger>
@@ -135,7 +135,7 @@ export default function FAQ() {
             {CLASSES.map((item) => (
               <AccordionItem key={item.value} value={item.value}>
                 <AccordionTrigger
-                  className={cn("text-taupe-700 text-base px-0")}
+                  className={cn("text-taupe-700 text-xl px-0")}
                 >
                   {item.question}
                 </AccordionTrigger>
@@ -155,7 +155,7 @@ export default function FAQ() {
             {PRICING.map((item) => (
               <AccordionItem key={item.value} value={item.value}>
                 <AccordionTrigger
-                  className={cn("text-taupe-700 text-base px-0")}
+                  className={cn("text-taupe-700 text-xl px-0")}
                 >
                   {item.question}
                 </AccordionTrigger>

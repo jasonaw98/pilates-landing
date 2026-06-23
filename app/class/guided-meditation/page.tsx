@@ -135,11 +135,11 @@ export default function ClassPage() {
     <main className="min-h-screen">
       <section className="mt-32">
         <div className="flex flex-col items-center gap-12">
-          <Link href="/class" className="text-sm font-nord py-1 px-3 underline">
+          <Link href="/class" className="text-h4 font-nord py-1 px-3 underline">
             <ArrowLeft className="inline-block mr-1" size={12} />
             Back to available classes
           </Link>
-          <h1 className="text-4xl font-ivy-ora-display">Guided Meditation</h1>
+          <h1 className="text-4xl font-ivy-ora-display md:text-h1">Guided Meditation</h1>
         </div>
       </section>
       <ClassZoomReveal
@@ -147,7 +147,7 @@ export default function ClassPage() {
         bgPosition="object-[50%_100%]"
         content={
           <div className="max-w-5xl px-8 text-center text-white flex-col flex justify-between items-center h-full py-20 pt-32">
-            <div className="text-2xl md:text-4xl h-full justify-center font-ivy-ora-display break-keep text-center items-center flex flex-col gap-2">
+            <div className="text-2xl md:text-h1 h-full justify-center font-ivy-ora-display break-keep text-center items-center flex flex-col gap-2">
               <p>A guided practice for </p>
               <div className="flex">
                 <p>calm, focus, and&nbsp;</p>
@@ -159,15 +159,15 @@ export default function ClassPage() {
       />
       <section>
         <div className="flex justify-around md:justify-center items-center py-2 md:py-10">
-          <div className="flex text-taupe-700 flex-col text-xs md:text-base">
+          <div className="flex text-taupe-700 flex-col text-xs md:text-h4">
             <span className="font-nord">Duration</span>
-            <span>50 mins</span>
+            <span className="text-b1">50 mins</span>
           </div>
           <span className="md:mx-12 h-10 w-px bg-neutral-300" />
-          <div className="flex text-taupe-700 flex-col text-xs md:text-base">
+          <div className="flex text-taupe-700 flex-col text-xs md:text-h4">
             <span className="font-nord">Difficulty</span>
             <div className="flex items-center gap-2">
-              Intermediate
+              <span className="text-b1">Intermediate</span>
               <div className="flex items-center gap-2">
                 <span className="size-2 flex rounded-full bg-taupe-700" />
                 <span className="size-2 flex rounded-full bg-taupe-700" />
@@ -176,9 +176,9 @@ export default function ClassPage() {
             </div>
           </div>
           <span className="md:mx-12 h-10 w-px bg-neutral-300" />
-          <div className="flex text-taupe-700 flex-col text-xs md:text-base">
+          <div className="flex text-taupe-700 flex-col text-xs md:text-h4">
             <span className="font-nord">Group size</span>
-            <span>Up to 6</span>
+            <span className="text-b1">Up to 6</span>
           </div>
         </div>
         <LineAnimation className="bg-neutral-300" />
@@ -192,7 +192,7 @@ export default function ClassPage() {
           viewport={{ once: true, amount: 0.9 }}
           className="flex flex-col items-center justify-center text-center gap-16"
         >
-          <p className="font-ivy-ora-display text-2xl px-1 md:max-w-4xl md:text-4xl tracking-wide md:leading-12">
+          <p className="font-ivy-ora-display text-2xl px-1 md:max-w-4xl md:text-h2 tracking-wide md:leading-12">
             A structured practice that uses verbal guidance to support focus,
             breath, and awareness. It helps quiet the mind, reduce tension, and
             cultivate a sense of
@@ -217,7 +217,7 @@ export default function ClassPage() {
       <LineAnimation className="bg-neutral-300" />
 
       <section className="flex flex-col gap-5 px-5 py-10 lg:px-72">
-        <h2 className="font-ivy-ora-display text-3xl text-taupe-700">
+        <h2 className="font-ivy-ora-display text-3xl md:text-h2 text-taupe-700">
           Meet Your Instructors
         </h2>
         <motion.div
@@ -257,10 +257,10 @@ export default function ClassPage() {
                     }}
                   />
                 </div>
-                <h3 className="font-ivy-ora-display text-2xl text-taupe-700">
+                <h3 className="font-ivy-ora-display text-2xl md:text-h3 text-taupe-700">
                   {instructor.name}
                 </h3>
-                <p className="font-nord text-sm text-taupe-700">
+                <p className="font-nord text-sm md:text-h4 text-taupe-700">
                   {instructor.category}
                 </p>
                 <p className="text-sm text-taupe-700">
@@ -282,7 +282,7 @@ export default function ClassPage() {
           className="px-4 py-12 flex flex-col gap-12 lg:px-24"
         >
           <div className="flex flex-col gap-5">
-            <h1 className="font-ivy-ora-display text-taupe-700 text-2xl">
+            <h1 className="font-ivy-ora-display text-taupe-700 text-2xl md:text-h2">
               Frequently Asked Questions
             </h1>
             <Accordion className={cn("border-none")}>
@@ -311,7 +311,7 @@ export default function ClassPage() {
           viewport={{ once: true, amount: 0.15 }}
           className="flex flex-col px-5 py-10 gap-5 will-change-transform lg:px-24"
         >
-          <h1 className="font-ivy-ora-display text-taupe-700 text-3xl will-change-transform">
+          <h1 className="font-ivy-ora-display text-taupe-700 text-3xl md:text-h2 will-change-transform">
             Explore other Classes
           </h1>
           <Carousel>
@@ -352,19 +352,19 @@ export default function ClassPage() {
                             View Class
                           </Link>
                         </div>
-                        <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
+                        <h2 className="font-ivy-ora-display text-taupe-700 text-2xl md:text-h3">
                           {classItem.name}
                         </h2>
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-                          <span className="font-nord text-taupe-700 uppercase">
+                          <span className="font-nord text-taupe-700 uppercase text-h4">
                             50 MINS
                           </span>
                           <span className="size-1 bg-taupe-700 rounded-full" />
-                          <span className="font-nord text-taupe-700">
+                          <span className="font-nord text-taupe-700 text-h4">
                             {classItem.level}
                           </span>
                           <span className="size-1 bg-taupe-700 rounded-full" />
-                          <span className="font-nord text-taupe-700 uppercase">
+                          <span className="font-nord text-taupe-700 uppercase text-h4">
                             MAX 6 PER GROUP
                           </span>
                         </div>

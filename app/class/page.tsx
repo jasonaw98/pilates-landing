@@ -163,10 +163,10 @@ function ClassHero() {
         className="relative z-10 flex h-full items-center justify-center text-white"
         style={{ y: titleY, opacity: titleOpacity }}
       >
-        <h1 className="flex text-center font-ivy-ora-display text-4xl break-keep">
+        <h1 className="flex text-center font-ivy-ora-display text-4xl md:text-h1 break-keep">
           Our
         </h1>
-        <span className="font-ivy-ora-display text-4xl break-keep italic">
+        <span className="font-ivy-ora-display text-4xl md:text-h1 break-keep italic">
           &nbsp;Classes
         </span>
       </motion.div>
@@ -223,7 +223,7 @@ export default function Class() {
         transition={{ duration: 0.8 }}
         className="flex flex-col px-5 py-10 gap-5 will-change-transform lg:px-24"
       >
-        <h1 className="font-ivy-ora-display text-taupe-700 text-3xl">
+        <h1 className="font-ivy-ora-display text-taupe-700 text-3xl md:text-h2">
           Packages
         </h1>
         <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8">
@@ -246,11 +246,11 @@ export default function Class() {
                   Learn More
                 </div>
               </div>
-              <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
+              <h2 className="font-ivy-ora-display text-taupe-700 text-2xl md:text-h3">
                 {pkg.name}
               </h2>
               <p className="text-taupe-700 text-sm">{pkg.description}</p>
-              <p className="font-nord text-taupe-700 text-lg">
+              <p className="font-nord text-taupe-700 text-lg md:text-h4">
                 {pkg.price}
                 <span className="text-taupe-700 text-xs">/ month</span>
               </p>
@@ -277,7 +277,7 @@ export default function Class() {
         viewport={{ once: true, amount: 0.15 }}
         className="flex flex-col px-5 py-10 gap-5 will-change-transform lg:px-24"
       >
-        <h1 className="font-ivy-ora-display text-taupe-700 text-3xl will-change-transform">
+        <h1 className="font-ivy-ora-display text-taupe-700 text-3xl will-change-transform md:text-h2">
           Available Classes
         </h1>
         <div className="flex flex-wrap items-center gap-8">
@@ -294,7 +294,7 @@ export default function Class() {
                   isActive ? "text-taupe-700" : "text-taupe-00 opacity-40"
                 }`}
               >
-                <span>{category}</span>
+                <span className="text-h4">{category}</span>
                 <span className="ml-1 py-0.5 tracking-[0.1rem] opacity-80">
                   ({categoryCounts[category]})
                 </span>
@@ -345,19 +345,19 @@ export default function Class() {
                     View Class
                   </Link>
                 </div>
-                <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
+                <h2 className="font-ivy-ora-display text-taupe-700 text-2xl md:text-h3">
                   {classItem.name}
                 </h2>
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-                  <span className="font-nord text-taupe-700 uppercase">
+                  <span className="font-nord text-taupe-700 uppercase text-h4">
                     50 MINS
                   </span>
                   <span className="size-1 bg-taupe-700 rounded-full" />
-                  <span className="font-nord text-taupe-700">
+                  <span className="font-nord text-taupe-700 text-h4 uppercase">
                     {classItem.level}
                   </span>
                   <span className="size-1 bg-taupe-700 rounded-full" />
-                  <span className="font-nord text-taupe-700 uppercase">
+                  <span className="font-nord text-taupe-700 uppercase text-h4">
                     MAX 6 PER GROUP
                   </span>
                 </div>
@@ -396,7 +396,7 @@ export default function Class() {
         viewport={{ once: true, amount: 0.15 }}
         className="flex flex-col px-5 py-10 gap-5 bg-[#E8DFC8] will-change-transform lg:px-24"
       >
-        <h1 className="font-ivy-ora-display text-taupe-700 text-3xl">
+        <h1 className="font-ivy-ora-display text-taupe-700 text-3xl md:text-h2">
           For your first visit
         </h1>
         <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8">
@@ -427,8 +427,8 @@ export default function Class() {
                   }}
                 />
               </div>
-              <h2 className="font-nord text-taupe-700 text-sm">{step.step}</h2>
-              <p className="text-taupe-700 text-sm">{step.description}</p>
+              <h2 className="font-nord text-taupe-700 text-sm md:text-h3">{step.step}</h2>
+              <p className="text-taupe-700 text-sm md:text-b1">{step.description}</p>
               <span className="mt-auto w-full h-px bg-neutral-300" />
             </motion.div>
           ))}

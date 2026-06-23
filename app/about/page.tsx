@@ -239,10 +239,10 @@ function AboutHero() {
         className="relative z-10 flex h-full items-center justify-center text-white"
         style={{ y: titleY, opacity: titleOpacity }}
       >
-        <h1 className="flex text-center font-ivy-ora-display text-4xl break-keep">
+        <h1 className="flex text-center font-ivy-ora-display text-4xl md:text-h1 break-keep">
           About
         </h1>
-        <span className="font-ivy-ora-display text-4xl break-keep italic">
+        <span className="font-ivy-ora-display text-4xl md:text-h1 break-keep italic">
           &nbsp;Us
         </span>
       </motion.div>
@@ -313,8 +313,8 @@ export default function About() {
           viewport={{ once: true, amount: 0.9 }}
           className="flex flex-col items-center justify-center gap-8 text-center md:py-10"
         >
-          <h1 className="font-nord text-taupe-700 uppercase">Our Philosophy</h1>
-          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-3xl md:leading-12">
+          <h1 className="font-nord text-taupe-700 uppercase text-h4">Our Philosophy</h1>
+          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-h2 md:leading-12">
             Wellness is not something to be achieved, but something to return
             to. At Forme, we see it as a quiet process of coming back to the
             body.
@@ -330,8 +330,8 @@ export default function About() {
           viewport={{ once: true, amount: 0.9 }}
           className="flex flex-col items-center justify-center gap-8 text-center md:py-10"
         >
-          <h1 className="font-nord text-taupe-700 uppercase">The Space</h1>
-          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-3xl md:leading-12">
+          <h1 className="font-nord text-taupe-700 uppercase text-h4">The Space</h1>
+          <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-h2 md:leading-12">
             Forme is set along the cliffs of Uluwatu, where land meets the sea.
             An intimate sanctuary, shaped by light and nature. A place to move,
             to rest, and to return.
@@ -374,7 +374,7 @@ export default function About() {
                   isActive ? "text-taupe-700" : "text-taupe-00 opacity-40"
                 }`}
               >
-                <span>{category}</span>
+                <span className="text-h4">{category}</span>
                 <span className="ml-1 py-0.5 tracking-[0.1rem] opacity-80">
                   ({categoryCounts[category]})
                 </span>
@@ -428,7 +428,7 @@ export default function About() {
                   <p className="font-nord text-sm text-taupe-700">
                     {instructor.category}
                   </p>
-                  <p className="text-sm text-taupe-700">
+                  <p className="text-b1 text-taupe-700">
                     {instructor.description}
                   </p>
                 </motion.div>
