@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ScrollToTop from "@/components/ScrollToTop";
+import SiteFooter from "@/components/SiteFooter";
 import { cn } from "@/lib/utils";
 
 const nord = localFont({
@@ -73,7 +73,7 @@ export default function RootLayout({
         <ScrollToTop />
         <Navbar />
         {children}
-        <Footer />
+        <SiteFooter />
       </body>
     </html>
   );

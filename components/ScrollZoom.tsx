@@ -107,7 +107,7 @@ export default function ScrollZoomReveal({
               scale: imageScale,
               y: imageY,
             }}
-            className="relative h-[110%] w-full brightness-90"
+            className="relative h-[110%] w-full"
           >
             <Image
               src={image}
@@ -115,7 +115,7 @@ export default function ScrollZoomReveal({
               fill
               priority
               sizes="100vw"
-              className="h-[110%] w-full object-cover scale-[1.4] object-[50%_100%]"
+              className="w-full object-cover "
             />
           </motion.div>
 
@@ -145,14 +145,19 @@ export default function ScrollZoomReveal({
               </div>
             </h1>
 
-            <div className="font-nord text-taupe-700 bg-[#F7F2EA] rounded-full w-full text-center py-2.5 px-6 uppercase text-xs md:max-w-xs cursor-pointer group relative overflow-hidden">
+            <a
+              href="https://tally.so/r/LZyNYv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-nord text-taupe-700 bg-[#F7F2EA] rounded-full w-full text-center py-2.5 px-6 uppercase text-xs md:max-w-xs cursor-pointer group relative overflow-hidden"
+            >
               <span className="block h-full transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                 Book your first class
               </span>
               <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                 Book your first class
               </span>
-            </div>
+            </a>
           </div>
         </motion.div>
       </div>

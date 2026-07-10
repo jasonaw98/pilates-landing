@@ -1,5 +1,6 @@
 "use client";
-import { motion, useScroll, useTransform, type Variants } from "motion/react";
+import { ArrowRightIcon } from "lucide-react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
@@ -26,12 +27,12 @@ const PACKAGES = [
   },
   {
     name: "Serenity Pass",
-    image: "/instructor/lior.jpg",
+    image: "/instructor/lior.png",
     price: "IDR 5.900.000",
     description:
       "Unlimited access to every class across pilates, yoga, and meditation. Includes guest privileges, retail discount, and seasonal workshop access.",
-    objectPosition: "60% 70%",
-    imageScale: 2.5,
+    objectPosition: "50% 50%",
+    imageScale: 1,
   },
 ] as const;
 
@@ -95,15 +96,15 @@ const CLASSES = [
 const FIRST_VISIT = [
   {
     image: "/assets/arrive.png",
-    step: "01 Arrive",
+    step: "1. Arrive",
     description:
-      "Ten minutes before your class, We'll gently guide you through the space",
+      "Ten minutes before your class, We'll gently guide you through the space.",
     objectPosition: "50% 50%",
     imageScale: 1,
   },
   {
     image: "/assets/wear.png",
-    step: "02 Wear",
+    step: "2. Wear",
     description:
       "Whatever allows you to move freely. Bare feet are encouraged.",
     objectPosition: "50% 50%",
@@ -111,7 +112,7 @@ const FIRST_VISIT = [
   },
   {
     image: "/assets/bring.png",
-    step: "03 Bring",
+    step: "3. Bring",
     description:
       "Just yourself. Mats, reformers, and all props are prepared for you.",
     objectPosition: "50% 50%",
@@ -119,7 +120,7 @@ const FIRST_VISIT = [
   },
   {
     image: "/assets/after.png",
-    step: "04 After",
+    step: "4. After",
     description:
       "Rest in our recovery lounge, and stay for as long as you need.",
     objectPosition: "50% 50%",
@@ -255,14 +256,19 @@ export default function Class() {
                 <span className="text-taupe-700 text-xs">/ month</span>
               </p>
 
-              <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group relative overflow-hidden cursor-pointer">
+              <a
+                href="https://tally.so/r/LZyNYv"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group relative overflow-hidden cursor-pointer"
+              >
                 <span className="block h-full text-center transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                   BUY NOW
                 </span>
                 <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                   BUY NOW
                 </span>
-              </div>
+              </a>
             </div>
           ))}
         </div>
@@ -361,14 +367,25 @@ export default function Class() {
                     MAX 6 PER GROUP
                   </span>
                 </div>
-                <div className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group/btn relative overflow-hidden cursor-pointer">
+                <Link
+                  href={classItem.href}
+                  className=" text-taupe-700 uppercase font-nord text-sm flex items-center gap-2"
+                >
+                  View Class <ArrowRightIcon className="size-4" />
+                </Link>
+                <a
+                  href="https://tally.so/r/LZyNYv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto border border-taupe-700 font-nord py-3 rounded-full text-xs group/btn relative overflow-hidden cursor-pointer"
+                >
                   <span className="block h-full text-center transition-all duration-300 group-hover/btn:-translate-y-full group-hover/btn:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                     BOOK NOW
                   </span>
                   <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover/btn:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
                     BOOK NOW
                   </span>
-                </div>
+                </a>
               </motion.div>
             ))}
           </motion.div>
@@ -427,13 +444,12 @@ export default function Class() {
                   }}
                 />
               </div>
-              <h2 className="font-nord text-taupe-700 text-sm md:text-h3">
+              <h2 className="font-ivy-ora-display text-taupe-700 text-sm md:text-h3">
                 {step.step}
               </h2>
               <p className="text-taupe-700 text-sm md:text-b1">
                 {step.description}
               </p>
-              <span className="mt-auto w-full h-px bg-neutral-300" />
             </motion.div>
           ))}
         </div>

@@ -18,12 +18,12 @@ const INSTRUCTORS = [
   },
   {
     name: "Lior Adler",
-    image: "/instructor/lior.jpg",
+    image: "/instructor/lior.png",
     category: "Yoga",
     description:
       "With over twenty years of practice, Lior’s classes feel less like instruction and more like permission. Rooted in Iyengar, yin, and somatic traditions.",
-    mobile: { objectPosition: "70% 60%", imageScale: 3.5 },
-    desktop: { objectPosition: "70% 50%", imageScale: 2.4 },
+    mobile: { objectPosition: "70% 60%", imageScale: 1 },
+    desktop: { objectPosition: "70% 50%", imageScale: 1 },
   },
   {
     name: "Lucia Romano",

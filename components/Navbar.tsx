@@ -112,13 +112,25 @@ export default function Navbar() {
             </Link>
             <div className="flex items-center gap-3">
               <Link
-                href="/"
+                href="https://tally.so/r/LZyNYv"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
-                  "border border-neutral-100 py-2.5 px-6 rounded-full font-nord text-xs text-white",
+                  "border border-neutral-100 py-2.5 px-6 rounded-full font-nord text-xs text-white group relative overflow-hidden transition-all duration-300",
                   scrolled && "border-taupe-700 text-taupe-700",
                 )}
               >
-                BOOK NOW
+                <span
+                  className={cn(
+                    "block h-full text-white transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]",
+                    scrolled && "border-taupe-700 text-taupe-700",
+                  )}
+                >
+                  BOOK NOW
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                  BOOK NOW
+                </span>
               </Link>
               <SheetTrigger
                 className="cursor-pointer"
@@ -147,14 +159,25 @@ export default function Navbar() {
                   </Link>
                 </SheetClose>
                 <div className="flex justify-between items-center gap-3">
-                  <SheetClose className={cn("cursor-pointer")}>
-                    <Link
-                      href=""
-                      className="border border-taupe-700 text-taupe-700 font-nord py-2.5 px-6 rounded-full text-xs"
+                  <Link
+                    href="https://tally.so/r/LZyNYv"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-taupe-700 text-taupe-700 font-nord py-2.5 px-6 rounded-full text-xs group relative overflow-hidden transition-all duration-300"
+                  >
+                    <span
+                      className={cn(
+                        "block h-full text-white transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]",
+                        scrolled && "border-taupe-700 text-taupe-700",
+                      )}
                     >
                       BOOK NOW
-                    </Link>
-                  </SheetClose>
+                    </span>
+                    <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                      BOOK NOW
+                    </span>
+                  </Link>
+                  <SheetClose className={cn("cursor-pointer")}></SheetClose>
                   <SheetClose className={cn("cursor-pointer")}>
                     <Image
                       src="/icons/x_navbar.svg"
@@ -187,11 +210,11 @@ export default function Navbar() {
 
             <div className="flex justify-center items-center pt-16 px-6">
               <Image
-                src="/assets/nav_sheet.jpg"
+                src="/assets/footer_3.png"
                 alt="logo"
                 width={400}
                 height={400}
-                className="rounded-sm brightness-50"
+                className="rounded-sm"
               />
             </div>
             <SheetFooter>
@@ -250,7 +273,9 @@ export default function Navbar() {
           </div>
           <div className="justify-self-end flex items-center gap-3">
             <Link
-              href=""
+              href="https://tally.so/r/LZyNYv"
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 "border border-white font-nord py-2.5 px-6 text-white rounded-full text-xs group relative overflow-hidden text-h4 transition-all duration-300",
                 scrolled && "border-taupe-700 text-taupe-700",

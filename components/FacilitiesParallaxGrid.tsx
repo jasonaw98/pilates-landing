@@ -7,15 +7,25 @@ import {
   useTransform,
 } from "motion/react";
 import Image from "next/image";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 const IMAGES = [
-  "/facilities/81-8.png",
-  "/facilities/81-4.png",
-  "/facilities/81.png",
-  "/facilities/81-6.png",
-  "/facilities/81-9.png",
-  "/facilities/81-5.png",
+  "/facilities/grid/1.png",
+  "/facilities/grid/2.png",
+  "/facilities/grid/3.png",
+  "/facilities/grid/4.png",
+  "/facilities/grid/5.png",
+  "/facilities/grid/6.png",
+] as const;
+
+const MobileIMAGES = [
+  "/facilities/grid/mobile/1.png",
+  "/facilities/grid/mobile/2.png",
+  "/facilities/grid/mobile/3.png",
+  "/facilities/grid/mobile/4.png",
+  "/facilities/grid/mobile/5.png",
+  "/facilities/grid/mobile/6.png",
 ] as const;
 
 type FacilitiesParallaxGridProps = {
@@ -34,6 +44,8 @@ function GridColumn({
   filter: (index: number) => boolean;
   className?: string;
 }) {
+  const isMobile = useIsMobile();
+  const GRID_IMAGES = isMobile ? MobileIMAGES : IMAGES;
   const smoothProgress = useSpring(progress, {
     stiffness: 100,
     damping: 10,
@@ -44,11 +56,11 @@ function GridColumn({
     <motion.div
       style={{ y }}
       className={cn(
-        "grid h-[120%] w-full grid-rows-3 will-change-transform transform-gpu",
+        "grid h-[110%] w-full grid-rows-3 will-change-transform transform-gpu",
         className,
       )}
     >
-      {IMAGES.map((image, index) => {
+      {GRID_IMAGES.map((image, index) => {
         if (!filter(index)) return null;
         return (
           <div
@@ -85,21 +97,22 @@ export function FacilitiesParallaxGrid({
         className,
       )}
     >
-      <div className="flex h-full w-full">
+      {/* Keep desktop column proportions on mobile — crop overflow instead of squeezing */}
+      <div className="absolute inset-y-0 left-1/2 flex h-full w-full min-w-4xl -translate-x-1/2">
         <GridColumn
           progress={progress}
-          yRange={["0%", "-5%"]}
+          yRange={["0%", "-3%"]}
           filter={(index) => index < 2}
         />
         <GridColumn
           progress={progress}
-          yRange={["0%", "5%"]}
+          yRange={["0%", "3%"]}
           filter={(index) => index > 1 && index < 4}
           className="-mt-20 h-[130%]"
         />
         <GridColumn
           progress={progress}
-          yRange={["0%", "-5%"]}
+          yRange={["0%", "-3%"]}
           filter={(index) => index > 3}
         />
       </div>

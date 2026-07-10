@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <main>
       <ScrollZoomReveal
-        image="/assets/footer_image.png"
+        image={isMobile ? "/assets/footer_image.png" : "/assets/footer_2.png"}
         title="Explore Beyond"
       />
 
