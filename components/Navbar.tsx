@@ -217,7 +217,7 @@ export default function Navbar() {
           className={cn(
             "hidden md:grid grid-cols-3 items-center p-10 md:pb-3 text-white lg:px-20 transition-all duration-500",
             scrolled &&
-              "bg-[#F7F2EA] backdrop-blur-md text-taupe-700 pt-4 border-b-2  border-taupe-700",
+              "bg-[#F7F2EA] backdrop-blur-md text-taupe-700 pt-4 border-b border-taupe-700",
           )}
         >
           <div className="flex items-center gap-10 text-h4">
@@ -228,7 +228,14 @@ export default function Navbar() {
             ))}
           </div>
           <div className="justify-self-center">
-            <Link href="/">
+            <Link
+              href="/"
+              scroll={true}
+              onClick={() => {
+                // Always scroll to top, even on the home page
+                window.scrollTo?.({ top: 0, behavior: "smooth" });
+              }}
+            >
               <Image
                 src={
                   scrolled

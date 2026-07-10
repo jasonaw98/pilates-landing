@@ -24,8 +24,8 @@ export default function MoreThanJust() {
         className="relative flex flex-col items-center justify-center gap-4 text-white h-full pb-12 px-4 z-10"
         style={{ y: titleY, opacity: titleOpacity }}
       >
-        <h1 className="text-4xl font-ivy-ora-display break-keep text-center flex flex-col md:flex-row text-h1">
-          <p>More than &nbsp;</p>
+        <h1 className="text-[32px] font-ivy-ora-display break-keep text-center flex flex-col md:flex-row md:text-h1">
+          <p>More than&nbsp;</p>
           <div className="flex">
             just a&nbsp;<p className="italic">studio.</p>
           </div>

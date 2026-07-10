@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import ScrollToTop from "@/components/ScrollToTop";
 import { cn } from "@/lib/utils";
 
 const nord = localFont({
@@ -44,6 +45,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pilates",
   description: "Pilates",
+  icons: {
+    icon: "/icons/ico.svg",
+  },
 };
 
 export default function RootLayout({
@@ -66,6 +70,7 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col bg-[#F7F2EA]">
+        <ScrollToTop />
         <Navbar />
         {children}
         <Footer />

@@ -1,5 +1,7 @@
 "use client";
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import Image from "next/image";
+import { useRef } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import {
   Accordion,
@@ -71,6 +73,48 @@ const PRICING = [
   },
 ] as const;
 
+function FaqHero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "48%"]);
+  const titleY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.4, 0]);
+
+  return (
+    <section ref={heroRef} className="relative h-[65dvh] overflow-hidden">
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 top-[-15%] h-[130%] will-change-transform"
+        style={{ y: backgroundY }}
+      >
+        <Image
+          src="/assets/faq.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-contain"
+        />
+      </motion.div>
+      <motion.div
+        className="relative z-10 flex h-full items-center justify-center text-white"
+        style={{ y: titleY, opacity: titleOpacity }}
+      >
+        <h1 className="flex text-center font-ivy-ora-display text-4xl md:text-h1 break-keep">
+          Frequently Asked
+        </h1>
+        <span className="font-ivy-ora-display text-4xl md:text-h1 break-keep italic">
+          &nbsp;Questions
+        </span>
+      </motion.div>
+    </section>
+  );
+}
+
 export default function FAQ() {
   return (
     <div>
@@ -86,20 +130,7 @@ export default function FAQ() {
           </div>
         }
       />
-      <div className="relative h-[65dvh] md:h-[60dvh]">
-        <div
-          className="absolute inset-0 bg-position-[80%_1%] bg-size-[170%] md:bg-size-[130%] md:bg-position-[50%_40%] bg-no-repeat brightness-50 bg-[url('/assets/faq.jpg')] grayscale-100"
-          aria-hidden="true"
-        />
-        <div className="relative flex flex-col md:flex-row items-center justify-center text-white h-full z-10">
-          <h1 className="text-4xl font-ivy-ora-display md:text-h1 break-keep text-center flex">
-            Frequently Asked
-          </h1>
-          <span className="text-4xl font-ivy-ora-display md:text-h1 break-keep italic">
-            &nbsp;Questions
-          </span>
-        </div>
-      </div>
+      <FaqHero />
 
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -114,9 +145,7 @@ export default function FAQ() {
           <Accordion className={cn("border-none")}>
             {NEW.map((item) => (
               <AccordionItem key={item.value} value={item.value}>
-                <AccordionTrigger
-                  className={cn("text-taupe-700 text-xl px-0")}
-                >
+                <AccordionTrigger className={cn("text-taupe-700 text-xl px-0")}>
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className={cn("text-taupe-700 text-base")}>
@@ -134,9 +163,7 @@ export default function FAQ() {
           <Accordion className={cn("border-none")}>
             {CLASSES.map((item) => (
               <AccordionItem key={item.value} value={item.value}>
-                <AccordionTrigger
-                  className={cn("text-taupe-700 text-xl px-0")}
-                >
+                <AccordionTrigger className={cn("text-taupe-700 text-xl px-0")}>
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className={cn("text-taupe-700 text-base")}>
@@ -154,9 +181,7 @@ export default function FAQ() {
           <Accordion className={cn("border-none")}>
             {PRICING.map((item) => (
               <AccordionItem key={item.value} value={item.value}>
-                <AccordionTrigger
-                  className={cn("text-taupe-700 text-xl px-0")}
-                >
+                <AccordionTrigger className={cn("text-taupe-700 text-xl px-0")}>
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className={cn("text-taupe-700 text-base")}>

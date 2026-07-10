@@ -29,9 +29,14 @@ export default function UnmaskLayers() {
                 href="https://www.instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="pointer-events-auto w-[70%] max-w-xs rounded-full bg-[#F7F2EA] px-5 py-2.5 text-center font-nord text-xs uppercase tracking-[0.12em] text-taupe-700 shadow-sm sm:px-7"
+                className="pointer-events-auto w-[70%] max-w-xs rounded-full bg-[#F7F2EA] px-5 py-2.5 text-center font-nord text-xs uppercase tracking-[0.12em] text-taupe-700 shadow-sm sm:px-7 group relative overflow-hidden transition-all duration-300"
               >
-                See more on Instagram
+                <span className="block h-full transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                  See more on Instagram
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center h-full transition-transform duration-300 group-hover:translate-y-0 translate-y-full ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
+                  See more on Instagram
+                </span>
               </Link>
             </div>
           </div>

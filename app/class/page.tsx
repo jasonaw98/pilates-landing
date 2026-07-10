@@ -151,12 +151,12 @@ function ClassHero() {
         style={{ y: backgroundY }}
       >
         <Image
-          src="/assets/ourclass.jpg"
+          src="/assets/our_classes.png"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="origin-[70%_90%] object-cover object-[70%_90%] brightness-50 grayscale scale-[1.7] md:scale-[1.25] lg:scale-100"
+          className="object-contain"
         />
       </motion.div>
       <motion.div
@@ -427,8 +427,12 @@ export default function Class() {
                   }}
                 />
               </div>
-              <h2 className="font-nord text-taupe-700 text-sm md:text-h3">{step.step}</h2>
-              <p className="text-taupe-700 text-sm md:text-b1">{step.description}</p>
+              <h2 className="font-nord text-taupe-700 text-sm md:text-h3">
+                {step.step}
+              </h2>
+              <p className="text-taupe-700 text-sm md:text-b1">
+                {step.description}
+              </p>
               <span className="mt-auto w-full h-px bg-neutral-300" />
             </motion.div>
           ))}

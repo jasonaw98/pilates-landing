@@ -1,7 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform, type Variants } from "motion/react";
 import Image from "next/image";
-import { useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -66,39 +66,27 @@ const INSTRUCTORS = [
 const FACILITIES = [
   {
     name: "Reformer Studio",
-    image: "/assets/bench.jpg",
-    objectPosition: "50% 40%",
-    scale: 1,
+    image: "/assets/bench.png",
   },
   {
     name: "Mat Studio",
-    image: "/assets/matstudio.jpg",
-    objectPosition: "50% 40%",
-    scale: 1,
+    image: "/assets/matstudio.png",
   },
   {
     name: "Recovery Lounge",
-    image: "/assets/sitting.jpg",
-    objectPosition: "50% 40%",
-    scale: 1,
+    image: "/assets/sitting.png",
   },
   {
     name: "Onsen",
-    image: "/assets/onsen.jpg",
-    objectPosition: "50% 70%",
-    scale: 1,
+    image: "/assets/onsen.png",
   },
   {
     name: "Outdoor Pool",
-    image: "/assets/pool.jpg",
-    objectPosition: "50% 40%",
-    scale: 1,
+    image: "/assets/pool.png",
   },
   {
     name: "Sauna",
-    image: "/assets/sauna.jpg",
-    objectPosition: "50% 40%",
-    scale: 1,
+    image: "/assets/sauna.png",
   },
 ] as const;
 
@@ -108,39 +96,92 @@ const gridVariants = {
 };
 
 function HorizontalScroll() {
-  const ref = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [scrollDistance, setScrollDistance] = useState(0);
+  const [introScrollPx, setIntroScrollPx] = useState(400);
+  const metricsRef = useRef({ introEnd: 0.25, scrollDistance: 0 });
+
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const measure = () => {
+      const nextIntro = window.innerHeight * 0.45;
+      const distance = Math.max(0, track.scrollWidth - window.innerWidth);
+      setIntroScrollPx(nextIntro);
+      setScrollDistance(distance);
+    };
+
+    measure();
+
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(track);
+    window.addEventListener("resize", measure);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
+  const totalExtraScroll = introScrollPx + scrollDistance;
+  const introEnd =
+    totalExtraScroll > 0 ? introScrollPx / totalExtraScroll : 0.25;
+
+  metricsRef.current = { introEnd, scrollDistance };
+
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: sectionRef,
     offset: ["start start", "end end"],
   });
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [1, 0, 0], {
-    clamp: true,
+  const titleOpacity = useTransform(scrollYProgress, (progress) => {
+    const end = metricsRef.current.introEnd * 0.8;
+    if (progress <= 0) return 1;
+    if (progress >= end) return 0;
+    return 1 - progress / end;
   });
 
-  const titleY = useTransform(scrollYProgress, [0, 0.25], [0, -80], {
-    clamp: true,
+  const titleY = useTransform(scrollYProgress, (progress) => {
+    const end = metricsRef.current.introEnd;
+    if (end <= 0) return 0;
+    return -80 * Math.min(1, progress / end);
   });
 
-  const cardsY = useTransform(scrollYProgress, [0.1, 0.3], [200, 0], {
-    clamp: true,
+  const cardsY = useTransform(scrollYProgress, (progress) => {
+    const { introEnd: end } = metricsRef.current;
+    const start = end * 0.35;
+    if (progress <= start) return 200;
+    if (progress >= end) return 0;
+    return 200 * (1 - (progress - start) / (end - start));
   });
 
-  const cardsOpacity = useTransform(
-    scrollYProgress,
-    [0.1, 0.2, 0.99],
-    [0, 1, 1],
-    {
-      clamp: true,
-    },
-  );
+  const cardsOpacity = useTransform(scrollYProgress, (progress) => {
+    const { introEnd: end } = metricsRef.current;
+    const start = end * 0.35;
+    const fadeEnd = end * 0.7;
+    if (progress <= start) return 0;
+    if (progress >= fadeEnd) return 1;
+    return (progress - start) / (fadeEnd - start);
+  });
 
-  const x = useTransform(scrollYProgress, [0.3, 1], ["0%", "-70%"], {
-    clamp: true,
+  // Horizontal travel ends exactly when the last card reaches the viewport edge
+  const x = useTransform(scrollYProgress, (progress) => {
+    const { introEnd: end, scrollDistance: distance } = metricsRef.current;
+    if (distance <= 0 || progress <= end) return 0;
+    const t = Math.min(1, (progress - end) / (1 - end));
+    return -t * distance;
   });
 
   return (
-    <section ref={ref} className="relative h-[300dvh]">
+    <section
+      ref={sectionRef}
+      className="relative"
+      style={{
+        height: `calc(100vh + ${totalExtraScroll}px)`,
+      }}
+    >
       <div className="sticky top-0 h-screen overflow-hidden bg-[#F7F2EA]">
         <motion.div
           style={{
@@ -154,54 +195,48 @@ function HorizontalScroll() {
           </h2>
         </motion.div>
         <motion.div
+          ref={trackRef}
           style={{
             x,
             y: cardsY,
             opacity: cardsOpacity,
           }}
-          className="absolute top-1/2 flex gap-8 px-[15vw] -translate-y-1/2"
+          className="absolute top-1/2 flex gap-x-6 px-[15vw] -translate-y-1/2 will-change-transform"
         >
-          <motion.div className="flex w-full gap-x-6 overflow-x-auto scrollbar-none snap-x snap-mandatory">
-            {FACILITIES.map((classItem, index) => (
+          {FACILITIES.map((classItem, index) => (
+            <motion.div
+              key={classItem.name}
+              className="group flex h-auto flex-col gap-3 min-w-[320px] sm:min-w-96 lg:min-w-112.5 shrink-0 justify-end"
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 1, type: "spring" },
+                },
+              }}
+            >
+              <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
+                {classItem.name}
+              </h2>
               <motion.div
-                key={classItem.name}
-                className="group flex h-full flex-col gap-3 min-w-[320px] sm:min-w-96 lg:min-w-112.5 shrink-0 snap-start justify-end"
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 1, type: "spring" },
-                  },
-                }}
+                className={cn(
+                  "relative aspect-4/3 w-full overflow-hidden cursor-pointer group",
+                  index % 2 === 0 && "h-full aspect-3/4",
+                )}
               >
-                <h2 className="font-ivy-ora-display text-taupe-700 text-2xl">
-                  {classItem.name}
-                </h2>
-                <motion.div
-                  className={cn(
-                    "relative aspect-4/3 w-full overflow-hidden cursor-pointer group",
-                    index % 2 === 0 && "h-full aspect-3/4",
-                  )}
-                >
-                  <motion.div className="relative h-full w-full">
-                    <Image
-                      src={classItem.image}
-                      alt={classItem.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      style={{
-                        objectPosition: classItem.objectPosition,
-                        transform: `scale(${classItem.scale})`,
-                        transformOrigin: classItem.objectPosition,
-                      }}
-                    />
-                  </motion.div>
+                <motion.div className="relative h-full w-full">
+                  <Image
+                    src={classItem.image}
+                    alt={classItem.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </motion.div>
               </motion.div>
-            ))}
-          </motion.div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
@@ -227,12 +262,12 @@ function AboutHero() {
         style={{ y: backgroundY }}
       >
         <Image
-          src="/assets/about.jpg"
+          src="/assets/about_us.png"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="origin-[45%_90%] object-cover object-[45%_90%] brightness-50 grayscale scale-[3.5] md:origin-[45%_80%] md:object-[45%_90%] md:scale-[2.5]"
+          className="object-contain"
         />
       </motion.div>
       <motion.div
@@ -313,7 +348,9 @@ export default function About() {
           viewport={{ once: true, amount: 0.9 }}
           className="flex flex-col items-center justify-center gap-8 text-center md:py-10"
         >
-          <h1 className="font-nord text-taupe-700 uppercase text-h4">Our Philosophy</h1>
+          <h1 className="font-nord text-taupe-700 uppercase text-h4">
+            Our Philosophy
+          </h1>
           <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-h2 md:leading-12">
             Wellness is not something to be achieved, but something to return
             to. At Forme, we see it as a quiet process of coming back to the
@@ -330,7 +367,9 @@ export default function About() {
           viewport={{ once: true, amount: 0.9 }}
           className="flex flex-col items-center justify-center gap-8 text-center md:py-10"
         >
-          <h1 className="font-nord text-taupe-700 uppercase text-h4">The Space</h1>
+          <h1 className="font-nord text-taupe-700 uppercase text-h4">
+            The Space
+          </h1>
           <p className="px-1 font-ivy-ora-display text-2xl tracking-wide md:max-w-3xl md:text-h2 md:leading-12">
             Forme is set along the cliffs of Uluwatu, where land meets the sea.
             An intimate sanctuary, shaped by light and nature. A place to move,

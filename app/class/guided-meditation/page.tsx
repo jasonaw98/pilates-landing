@@ -139,7 +139,9 @@ export default function ClassPage() {
             <ArrowLeft className="inline-block mr-1" size={12} />
             Back to available classes
           </Link>
-          <h1 className="text-4xl font-ivy-ora-display md:text-h1">Guided Meditation</h1>
+          <h1 className="text-4xl font-ivy-ora-display md:text-h1">
+            Guided Meditation
+          </h1>
         </div>
       </section>
       <ClassZoomReveal
