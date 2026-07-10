@@ -201,7 +201,9 @@ export default function ClassPage() {
           </p>
           <div className="justify-center flex items-center">
             <Link
-              href="https://tally.so/r/LZyNYv" target="_blank" rel="noopener noreferrer"
+              href="https://tally.so/r/LZyNYv"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-[#3A1A12] text-white font-nord py-3.5 px-8 rounded-full text-xs group relative overflow-hidden"
             >
               <span className="block h-full transition-all duration-300 group-hover:-translate-y-full group-hover:opacity-0 translate-y-0 opacity-100 ease-[cubic-bezier(0.68,-0.55,0.27,1.55)]">
