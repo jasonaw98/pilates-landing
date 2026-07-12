@@ -243,7 +243,7 @@ function HorizontalScroll() {
   );
 }
 
-function AboutHero() {
+function AboutHero({ mobile }: { mobile: boolean }) {
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -262,12 +262,12 @@ function AboutHero() {
         style={{ y: backgroundY }}
       >
         <Image
-          src="/assets/about_us.png"
+          src={mobile ? "/assets/about_mobile.png" : "/assets/about_us.png"}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-contain"
+          className="object-cover md:object-contain"
         />
       </motion.div>
       <motion.div
@@ -338,7 +338,7 @@ export default function About() {
           </div>
         }
       />
-      <AboutHero />
+      <AboutHero mobile={isMobile} />
 
       <section className="flex flex-col gap-20 px-4 py-20">
         <motion.div
@@ -399,7 +399,7 @@ export default function About() {
         <h2 className="font-ivy-ora-display text-3xl text-taupe-700">
           Meet Your Instructors
         </h2>
-        <div className="flex flex-wrap items-center gap-8">
+        <div className="-mx-5 flex items-center gap-4 overflow-x-auto px-5 scrollbar-none md:mx-0 md:flex-wrap md:gap-8 md:overflow-visible md:px-0">
           {categories.map((category) => {
             const isActive = activeFilter === category;
 
@@ -409,7 +409,7 @@ export default function About() {
                 type="button"
                 onClick={() => setActiveFilter(category)}
                 transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                className={`py-2 font-nord text-sm font-semibold uppercase tracking-[0.2em] transition cursor-pointer ${
+                className={`shrink-0 py-2 font-nord text-xs md:text-sm font-semibold uppercase tracking-[0.2em] transition cursor-pointer ${
                   isActive ? "text-taupe-700" : "text-taupe-00 opacity-40"
                 }`}
               >

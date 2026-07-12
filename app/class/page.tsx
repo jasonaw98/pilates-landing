@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const PACKAGES = [
   {
@@ -133,7 +134,7 @@ const gridVariants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-function ClassHero() {
+function ClassHero({ mobile }: { mobile: boolean }) {
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -152,12 +153,12 @@ function ClassHero() {
         style={{ y: backgroundY }}
       >
         <Image
-          src="/assets/our_classes.png"
+          src={mobile ? "/assets/class_mobile.png" : "/assets/our_classes.png"}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-contain"
+          className="object-cover md:object-contain"
         />
       </motion.div>
       <motion.div
@@ -177,6 +178,7 @@ function ClassHero() {
 
 export default function Class() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const isMobile = useIsMobile();
 
   const categories = ["All", "Pilates", "Yoga", "Meditation"] as const;
 
@@ -216,7 +218,7 @@ export default function Class() {
         }
       />
 
-      <ClassHero />
+      <ClassHero mobile={isMobile} />
 
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -286,7 +288,7 @@ export default function Class() {
         <h1 className="font-ivy-ora-display text-taupe-700 text-3xl will-change-transform md:text-h2">
           Available Classes
         </h1>
-        <div className="flex flex-wrap items-center gap-8">
+        <div className="-mx-5 flex items-center gap-4 overflow-x-auto px-5 scrollbar-none md:mx-0 md:flex-wrap md:gap-8 md:overflow-visible md:px-0">
           {categories.map((category) => {
             const isActive = activeFilter === category;
 
@@ -296,7 +298,7 @@ export default function Class() {
                 type="button"
                 onClick={() => setActiveFilter(category)}
                 transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                className={`py-2 font-nord text-sm font-semibold uppercase tracking-[0.2em] transition cursor-pointer ${
+                className={`shrink-0 py-2 font-nord text-xs md:text-sm font-semibold uppercase tracking-[0.2em] transition cursor-pointer ${
                   isActive ? "text-taupe-700" : "text-taupe-00 opacity-40"
                 }`}
               >

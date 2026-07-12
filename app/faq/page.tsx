@@ -9,6 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 const NEW = [
@@ -73,7 +74,7 @@ const PRICING = [
   },
 ] as const;
 
-function FaqHero() {
+function FaqHero({ mobile }: { mobile: boolean }) {
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -92,12 +93,12 @@ function FaqHero() {
         style={{ y: backgroundY }}
       >
         <Image
-          src="/assets/faq.png"
+          src={mobile ? "/assets/faq_mobile.png" : "/assets/faq.png"}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-contain"
+          className="object-cover md:object-contain"
         />
       </motion.div>
       <motion.div
@@ -116,6 +117,7 @@ function FaqHero() {
 }
 
 export default function FAQ() {
+  const isMobile = useIsMobile();
   return (
     <div>
       <LoadingScreen
@@ -130,7 +132,7 @@ export default function FAQ() {
           </div>
         }
       />
-      <FaqHero />
+      <FaqHero mobile={isMobile} />
 
       <motion.div
         initial={{ opacity: 0, y: 100 }}

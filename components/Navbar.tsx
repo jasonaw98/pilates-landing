@@ -98,7 +98,13 @@ export default function Navbar() {
                 "bg-[#F7F2EA] backdrop-blur-md text-taupe-700 border-b border-taupe-700 pt-4 pb-3",
             )}
           >
-            <Link href="/">
+            <Link
+              href="/"
+              onClick={() => {
+                // Always scroll to top, even on the home page
+                window.scrollTo?.({ top: 0, behavior: "smooth" });
+              }}
+            >
               <Image
                 src={
                   scrolled

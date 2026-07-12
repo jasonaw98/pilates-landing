@@ -46,7 +46,18 @@ export const metadata: Metadata = {
   title: "Pilates",
   description: "Pilates",
   icons: {
-    icon: "/icons/ico.svg",
+    icon: [
+      {
+        url: "/icons/ico.svg",
+        href: "/icons/ico.svg",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icons/ico_white.svg",
+        href: "/icons/ico_white.svg",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
   },
 };
 
