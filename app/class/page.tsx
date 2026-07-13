@@ -446,7 +446,7 @@ export default function Class() {
                   }}
                 />
               </div>
-              <h2 className="font-ivy-ora-display text-taupe-700 text-sm md:text-h3">
+              <h2 className="font-ivy-ora-display text-taupe-700 text-h3">
                 {step.step}
               </h2>
               <p className="text-taupe-700 text-sm md:text-b1">
